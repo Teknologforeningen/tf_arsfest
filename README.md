@@ -9,14 +9,9 @@ Developing
 
 Ubuntu packages: 
 python-virtualenv
+python-pip
 
+pip packages:
+django
+south
 
-1. Clone repository
-
-2. Activate virtualenv: 
-$ source ./env/bin/activate
-
-3. Develop 
-
-4. Deactivate virtualenv: 
-$ deactivate
