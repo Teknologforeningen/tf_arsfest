@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>TF &Acirc;rsfest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link type="text/less" href="{{ STATIC_URL }}css/bootstrap.min.css"
+	rel="stylesheet">
+<link type="text/less"
+	href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body class="{% block body_classes %}{% endblock %}">
+
+	<div class="container-fluid">
+
+		{% block content %} {% endblock %}
+		<hr>
+
+		<footer>
+			<p>&copy; Teknologf&ouml;reningen 2012</p>
+		</footer>
+
+	</div>
+	<!--/.fluid-container-->
+
+
+	<script type="text/javascript"
+		src="http://platform.twitter.com/widgets.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+
+</body>
+</html>

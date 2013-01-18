@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row-fluid">
+	<div class="span9">
+
+		<form action="/participant/new/" method="post">
+			<table>
+        		{{ formset }}
+    		</table>
+		</form>
+
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->
+{% endblock %}

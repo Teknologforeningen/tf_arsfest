@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from views import *
 
 
 # Uncomment the next two lines to enable the admin:
@@ -16,8 +17,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
+    url(r'^guest/new/$', add_participant, name='add-participant'),
+    
+    
 )
 
-# TODO: Add production collecting
+# TODO: Add production collecting of files
 urlpatterns += staticfiles_urlpatterns()
 
