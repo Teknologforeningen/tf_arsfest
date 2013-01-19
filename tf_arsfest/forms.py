@@ -1,10 +1,10 @@
 from django.forms import ModelForm
-from models import *
+from models import Guest
 
 
 class RegistrationForm(ModelForm):
     class Meta:
-        model = Participant
+        model = Guest
         
         
     

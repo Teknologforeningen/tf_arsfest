@@ -1,8 +1,7 @@
 # --coding: UTF-8 --
 from django.db import models
 
-
-class Participant(models.Model):
+class Guest(models.Model):
     # Name
     name = models.CharField(max_length=90, verbose_name="Namn")
     
@@ -16,10 +15,28 @@ class Participant(models.Model):
     allergies = models.TextField(verbose_name="Allergier", blank=True)
     
     # Student or not
-    type = models.ForeignKey('ParticipantType', verbose_name="Deltagartyp")
+    type = models.ForeignKey('GuestType', verbose_name="Deltagartyp")
     
-    # Avec
-    avec = models.OneToOneField('Participant', verbose_name="Avec", null=True, blank=True)
+    #Alkoholfri
+    nonalcoholic = models.BooleanField(verbose_name="Alkoholfri", default=False)
+    
+        
+class Registration(models.Model):
+    
+    # Förening
+    name = models.CharField(max_length=150, verbose_name="Förening")
+    
+    #Deltar i solenn-akt
+    solennakt = models.BooleanField(verbose_name="Deltar i solenn akt", default=False)
+    
+    #Framför hälsning
+    greeting = models.BooleanField(verbose_name="Vill framföra hälsning", default=False)
+    
+    #Gäst
+    guest = models.ForeignKey(Guest, related_name="guest")
+    
+    #Avec
+    avec = models.ForeignKey(Guest, blank=True, null=True, related_name="avec")  
     
     def __unicode__(self):
         return self.name
@@ -31,17 +48,23 @@ class Event(models.Model):
     # Name
     name = models.CharField(max_length=120, verbose_name="Händelsens namn")
     
+    # Platser
+    places = models.PositiveIntegerField(verbose_name="Max antal gäster")
+    
     def __unicode__(self):
         return self.name
     
-class ParticipantType(models.Model):
+class GuestType(models.Model):
     
     # Name of type
     name = models.CharField(max_length=50)
+    
+    # Price
+    price = models.PositiveIntegerField()
     
     def __unicode__(self):
         return self.name
     
 class Invoice(models.Model):
-    reference_number = models.PositiveIntegerField()
-    sum = models.FloatField()
+    reference_number = models.PositiveIntegerField(verbose_name="Referensnummer")
+    sum = models.FloatField(verbose_name="Summa")
