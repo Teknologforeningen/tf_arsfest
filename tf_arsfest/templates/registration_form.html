@@ -5,8 +5,9 @@
 		<form action="/{{ year }}/new/" method="post">
 			{% csrf_token %}
 			<table>
-				{{ registration }} {{ guest }}
-
+				{{ registration }} 
+				
+				{{ guest }}
 
 				<tr>
 					<th><label for="id_avec-name">Avec:</label></th>
@@ -15,10 +16,8 @@
 				</tr>
 			</table>
 
-			<table id="avec-table">{{ avec }}
-
-
-
+			<table id="avec-table">
+			{{ avec }}
 			</table>
 
 			<input type="submit" value="Skicka" />
@@ -29,7 +28,7 @@
 				$("#avec-table").hide(0);
 
 				$("#avec-box").change(function() {
-						$("#avec-table").toggle('slow');				
+					$("#avec-table").toggle('slow');
 				});
 			});
 		</script>
