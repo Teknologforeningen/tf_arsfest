@@ -2,27 +2,37 @@
 <div class="row-fluid">
 	<div class="span9">
 
-		<form action="/{{ year }}/new/" method="post">{% csrf_token %}
+		<form action="/{{ year }}/new/" method="post">
+			{% csrf_token %}
 			<table>
-        		{{ registration }}
-        		
-        		{{ guest }}
-        		
-        		<tr>
-        			<th>
-        				<label for="id_avec-name">Avec:</label>
-        			</th>
-        		<td>
-        			<input type="checkbox" name="aveccheckbox" value="Yes">
-        		</td>
-        		</tr>
-        		
-        		
-        		{{ avec }}
-    		</table>
-    		
-    		<input type="submit" value="Skicka" />
+				{{ registration }} {{ guest }}
+
+
+				<tr>
+					<th><label for="id_avec-name">Avec:</label></th>
+					<td><input type="checkbox" id="avec-box" name="aveccheckbox"
+						value="Yes"></td>
+				</tr>
+			</table>
+
+			<table id="avec-table">{{ avec }}
+
+
+
+			</table>
+
+			<input type="submit" value="Skicka" />
 		</form>
+
+		<script>
+			$(document).ready(function() {
+				$("#avec-table").hide(0);
+
+				$("#avec-box").change(function() {
+						$("#avec-table").toggle('slow');				
+				});
+			});
+		</script>
 
 	</div>
 	<!--/span-->
