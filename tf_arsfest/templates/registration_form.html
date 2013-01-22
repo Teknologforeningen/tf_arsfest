@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row-fluid">
+	<div class="span9">
+
+		<form action="/{{ year }}/new/" method="post">{% csrf_token %}
+			<table>
+        		{{ registration }}
+        		
+        		{{ guest }}
+        		
+        		<tr>
+        			<th>
+        				<label for="id_avec-name">Avec:</label>
+        			</th>
+        		<td>
+        			<input type="checkbox" name="aveccheckbox" value="Yes">
+        		</td>
+        		</tr>
+        		
+        		
+        		{{ avec }}
+    		</table>
+    		
+    		<input type="submit" value="Skicka" />
+		</form>
+
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->
+{% endblock %}

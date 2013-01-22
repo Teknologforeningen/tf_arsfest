@@ -20,11 +20,14 @@ class Guest(models.Model):
     #Alkoholfri
     nonalcoholic = models.BooleanField(verbose_name="Alkoholfri", default=False)
     
+    def __unicode__(self):
+        return self.name
+    
         
 class Registration(models.Model):
     
     # Förening
-    name = models.CharField(max_length=150, verbose_name="Förening")
+    name = models.CharField(max_length=150, verbose_name="Förening", blank=True, null=True)
     
     #Deltar i solenn-akt
     solennakt = models.BooleanField(verbose_name="Deltar i solenn akt", default=False)
@@ -57,13 +60,13 @@ class Event(models.Model):
 class GuestType(models.Model):
     
     # Name of type
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name="Namn (t.ex. studerande)")
     
     # Price
-    price = models.PositiveIntegerField()
+    price = models.PositiveIntegerField(verbose_name="Pris")
     
     def __unicode__(self):
-        return self.name
+        return "%s (%de)" % (self.name, self.price)
     
 class Invoice(models.Model):
     reference_number = models.PositiveIntegerField(verbose_name="Referensnummer")
