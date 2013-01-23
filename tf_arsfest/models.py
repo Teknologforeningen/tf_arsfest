@@ -12,7 +12,7 @@ class Guest(models.Model):
     phone = models.CharField(max_length=20, verbose_name="Telefonnummer")
     
     # Allergies
-    allergies = models.TextField(verbose_name="Allergier", blank=True)
+    allergies = models.CharField(max_length=180, verbose_name="Allergier", blank=True)
     
     # Student or not
     type = models.ForeignKey('GuestType', verbose_name="Deltagartyp")
@@ -43,6 +43,9 @@ class Registration(models.Model):
     
     # Avec
     avec = models.OneToOneField(Guest, blank=True, null=True, related_name="avec", unique=True)
+    
+    # Övrigt
+    misc = models.TextField(verbose_name="Övrigt", blank=True)
     
     avecbutton = models.BooleanField(verbose_name="Avec")
     # Avec boolean

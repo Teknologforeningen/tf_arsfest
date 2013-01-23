@@ -14,7 +14,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=90)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('allergies', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('allergies', self.gf('django.db.models.fields.CharField')(max_length=180, blank=True)),
             ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tf_arsfest.GuestType'])),
             ('nonalcoholic', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('silliz', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -29,6 +29,7 @@ class Migration(SchemaMigration):
             ('greeting', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('guest', self.gf('django.db.models.fields.related.OneToOneField')(related_name='guest', unique=True, to=orm['tf_arsfest.Guest'])),
             ('avec', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='avec', unique=True, null=True, to=orm['tf_arsfest.Guest'])),
+            ('misc', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('avecbutton', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('tf_arsfest', ['Registration'])
@@ -86,7 +87,7 @@ class Migration(SchemaMigration):
         },
         'tf_arsfest.guest': {
             'Meta': {'object_name': 'Guest'},
-            'allergies': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'allergies': ('django.db.models.fields.CharField', [], {'max_length': '180', 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '90'}),
@@ -114,6 +115,7 @@ class Migration(SchemaMigration):
             'greeting': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'guest': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'guest'", 'unique': 'True', 'to': "orm['tf_arsfest.Guest']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'misc': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
             'solennakt': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         }
