@@ -29,17 +29,20 @@ class Registration(models.Model):
     # Förening
     name = models.CharField(max_length=150, verbose_name="Förening", blank=True, null=True)
     
-    #Deltar i solenn-akt
+    # Deltar i solenn-akt
     solennakt = models.BooleanField(verbose_name="Deltar i solenn akt", default=False)
     
-    #Framför hälsning
+    # Framför hälsning
     greeting = models.BooleanField(verbose_name="Vill framföra hälsning", default=False)
     
-    #Gäst
-    guest = models.ForeignKey(Guest, related_name="guest")
+    # Gäst
+    guest = models.OneToOneField(Guest, related_name="guest", unique=True)
     
-    #Avec
-    avec = models.ForeignKey(Guest, blank=True, null=True, related_name="avec")  
+    # Avec
+    avec = models.OneToOneField(Guest, blank=True, null=True, related_name="avec", unique=True)
+    
+    avecbutton = models.BooleanField(verbose_name="Avec")
+    # Avec boolean
     
     def __unicode__(self):
         return self.name

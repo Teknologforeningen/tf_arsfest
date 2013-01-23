@@ -23,11 +23,12 @@ class Migration(SchemaMigration):
         # Adding model 'Registration'
         db.create_table('tf_arsfest_registration', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=150, null=True, blank=True)),
             ('solennakt', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('greeting', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('guest', self.gf('django.db.models.fields.related.ForeignKey')(related_name='guest', to=orm['tf_arsfest.Guest'])),
-            ('avec', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='avec', null=True, to=orm['tf_arsfest.Guest'])),
+            ('guest', self.gf('django.db.models.fields.related.OneToOneField')(related_name='guest', unique=True, to=orm['tf_arsfest.Guest'])),
+            ('avec', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='avec', unique=True, null=True, to=orm['tf_arsfest.Guest'])),
+            ('avecbutton', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('tf_arsfest', ['Registration'])
 
@@ -106,11 +107,12 @@ class Migration(SchemaMigration):
         },
         'tf_arsfest.registration': {
             'Meta': {'object_name': 'Registration'},
-            'avec': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'avec'", 'null': 'True', 'to': "orm['tf_arsfest.Guest']"}),
+            'avec': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'avec'", 'unique': 'True', 'null': 'True', 'to': "orm['tf_arsfest.Guest']"}),
+            'avecbutton': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'greeting': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'guest': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'guest'", 'to': "orm['tf_arsfest.Guest']"}),
+            'guest': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'guest'", 'unique': 'True', 'to': "orm['tf_arsfest.Guest']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
             'solennakt': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         }
     }

@@ -9,11 +9,6 @@
 				
 				{{ guest }}
 
-				<tr>
-					<th><label for="id_avec-name">Avec:</label></th>
-					<td><input type="checkbox" id="avec-box" name="aveccheckbox"
-						value="Yes"></td>
-				</tr>
 			</table>
 
 			<table id="avec-table">
@@ -25,9 +20,13 @@
 
 		<script>
 			$(document).ready(function() {
-				$("#avec-table").hide(0);
+				
+				if (!$("#id_avecbutton").is(":checked")){
+					$("#avec-table").hide();
+				}
+				
 
-				$("#avec-box").change(function() {
+				$("#id_avecbutton").change(function() {
 					$("#avec-table").toggle('slow');
 				});
 			});
