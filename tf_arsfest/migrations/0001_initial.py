@@ -17,6 +17,7 @@ class Migration(SchemaMigration):
             ('allergies', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tf_arsfest.GuestType'])),
             ('nonalcoholic', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('silliz', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('tf_arsfest', ['Guest'])
 
@@ -91,6 +92,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '90'}),
             'nonalcoholic': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'silliz': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tf_arsfest.GuestType']"})
         },
         'tf_arsfest.guesttype': {

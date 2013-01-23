@@ -17,8 +17,11 @@ class Guest(models.Model):
     # Student or not
     type = models.ForeignKey('GuestType', verbose_name="Deltagartyp")
     
-    #Alkoholfri
+    # Alkoholfri
     nonalcoholic = models.BooleanField(verbose_name="Alkoholfri", default=False)
+    
+    # Silliz
+    silliz = models.BooleanField(verbose_name="Sillfrukost")
     
     def __unicode__(self):
         return self.name
