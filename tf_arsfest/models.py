@@ -12,7 +12,7 @@ class Guest(models.Model):
     phone = models.CharField(max_length=20, verbose_name="Telefonnummer")
     
     # Allergies
-    allergies = models.CharField(max_length=180, verbose_name="Allergier", blank=True)
+    allergies = models.CharField(max_length=180, verbose_name="Allergier/Dieter", blank=True)
     
     # Student or not
     type = models.ForeignKey('GuestType', verbose_name="Deltagartyp")
@@ -47,13 +47,19 @@ class Registration(models.Model):
     # Övrigt
     misc = models.TextField(verbose_name="Övrigt", blank=True)
     
-    avecbutton = models.BooleanField(verbose_name="Avec")
     # Avec boolean
+    avecbutton = models.BooleanField(verbose_name="Avec")
+    
+    
     
     def __unicode__(self):
         return self.name
     
 class Event(models.Model):
+    
+    # Årsfest nr
+    year = models.PositiveIntegerField(primary_key=True)
+    
     # Date&Time
     date = models.TimeField()
     
@@ -62,6 +68,19 @@ class Event(models.Model):
     
     # Platser
     places = models.PositiveIntegerField(verbose_name="Max antal gäster")
+    
+    # Anmälningen öppnar första gången
+    round1_opens = models.TimeField()
+    
+    # Anmälningen stänger första gången
+    round1_closes = models.TimeField()
+    
+    # Anmälningen öppnar andra gången
+    round2_opens = models.TimeField()
+    
+    # Anmälningen stänger andra gången
+    round2_closes = models.TimeField()
+    
     
     def __unicode__(self):
         return self.name
