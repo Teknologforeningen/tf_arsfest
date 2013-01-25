@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, RadioSelect
 from models import Registration, Guest
 
 
@@ -10,6 +10,7 @@ class RegistrationForm(ModelForm):
 class GuestForm(ModelForm):
     class Meta:
         model = Guest
+        widgets = {'type': RadioSelect}
         
         
     
