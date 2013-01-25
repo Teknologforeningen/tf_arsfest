@@ -39,7 +39,8 @@ def register(request, year):
                     return render_to_response('registration_form.html', {'registration': registration_form,
                                                              'guest': guest_form,
                                                              'avec': avec_form,
-                                                             'year': year}
+                                                             'year': year,
+                                                             'desc': event.registration_description}
                                   , context_instance=RequestContext(request))
             
             # All good, save          
@@ -63,7 +64,8 @@ def register(request, year):
     return render_to_response('registration_form.html', {'registration': registration_form,
                                                              'guest': guest_form,
                                                              'avec': avec_form,
-                                                             'year': year}
+                                                             'year': year,
+                                                             'desc': event.registration_description}
                               , context_instance=RequestContext(request))
         
         

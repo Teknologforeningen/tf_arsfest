@@ -45,6 +45,7 @@ class Migration(SchemaMigration):
             ('round1_closes', self.gf('django.db.models.fields.TimeField')()),
             ('round2_opens', self.gf('django.db.models.fields.TimeField')()),
             ('round2_closes', self.gf('django.db.models.fields.TimeField')()),
+            ('registration_description', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal('tf_arsfest', ['Event'])
 
@@ -88,6 +89,7 @@ class Migration(SchemaMigration):
             'date': ('django.db.models.fields.TimeField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
             'places': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'registration_description': ('django.db.models.fields.TextField', [], {}),
             'round1_closes': ('django.db.models.fields.TimeField', [], {}),
             'round1_opens': ('django.db.models.fields.TimeField', [], {}),
             'round2_closes': ('django.db.models.fields.TimeField', [], {}),

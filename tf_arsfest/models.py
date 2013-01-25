@@ -84,6 +84,9 @@ class Event(models.Model):
     # Anmälningen stänger andra gången
     round2_closes = models.TimeField()
     
+    # Beskrivning på anmälan
+    registration_description = models.TextField(verbose_name="Beskrivning vid anmälan")
+    
     
     def __unicode__(self):
         return self.name
