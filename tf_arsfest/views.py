@@ -1,9 +1,12 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from forms import *
+from models import Event
 
     
 def register(request, year):
+    
+    event = get_object_or_404(Event, pk=year);
     
     # If posting a filled out form
     if request.POST:
@@ -49,9 +52,12 @@ def register(request, year):
         
     # If not POST    
     else:
-        registration_form = RegistrationForm()
+        registration = Registration()
+        registration.event = event
+        registration_form = RegistrationForm(instance=registration)
         guest_form = GuestForm(prefix='guest')
         avec_form = GuestForm(prefix='avec')
+
     
     # If forms not valid or not POST
     return render_to_response('registration_form.html', {'registration': registration_form,

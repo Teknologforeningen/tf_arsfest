@@ -24,6 +24,7 @@ class Migration(SchemaMigration):
         # Adding model 'Registration'
         db.create_table('tf_arsfest_registration', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('event', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tf_arsfest.Event'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150, null=True, blank=True)),
             ('solennakt', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('greeting', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -36,10 +37,14 @@ class Migration(SchemaMigration):
 
         # Adding model 'Event'
         db.create_table('tf_arsfest_event', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('year', self.gf('django.db.models.fields.PositiveIntegerField')(primary_key=True)),
             ('date', self.gf('django.db.models.fields.TimeField')()),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=120)),
             ('places', self.gf('django.db.models.fields.PositiveIntegerField')()),
+            ('round1_opens', self.gf('django.db.models.fields.TimeField')()),
+            ('round1_closes', self.gf('django.db.models.fields.TimeField')()),
+            ('round2_opens', self.gf('django.db.models.fields.TimeField')()),
+            ('round2_closes', self.gf('django.db.models.fields.TimeField')()),
         ))
         db.send_create_signal('tf_arsfest', ['Event'])
 
@@ -81,9 +86,13 @@ class Migration(SchemaMigration):
         'tf_arsfest.event': {
             'Meta': {'object_name': 'Event'},
             'date': ('django.db.models.fields.TimeField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
-            'places': ('django.db.models.fields.PositiveIntegerField', [], {})
+            'places': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'round1_closes': ('django.db.models.fields.TimeField', [], {}),
+            'round1_opens': ('django.db.models.fields.TimeField', [], {}),
+            'round2_closes': ('django.db.models.fields.TimeField', [], {}),
+            'round2_opens': ('django.db.models.fields.TimeField', [], {}),
+            'year': ('django.db.models.fields.PositiveIntegerField', [], {'primary_key': 'True'})
         },
         'tf_arsfest.guest': {
             'Meta': {'object_name': 'Guest'},
@@ -112,6 +121,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Registration'},
             'avec': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'avec'", 'unique': 'True', 'null': 'True', 'to': "orm['tf_arsfest.Guest']"}),
             'avecbutton': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'event': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tf_arsfest.Event']"}),
             'greeting': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'guest': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'guest'", 'unique': 'True', 'to': "orm['tf_arsfest.Guest']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

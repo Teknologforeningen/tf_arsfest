@@ -29,6 +29,9 @@ class Guest(models.Model):
         
 class Registration(models.Model):
     
+    # Vilken fest
+    event = models.ForeignKey('Event', verbose_name="Årsfest");
+    
     # Förening
     name = models.CharField(max_length=150, verbose_name="Förening", blank=True, null=True)
     
@@ -53,7 +56,7 @@ class Registration(models.Model):
     
     
     def __unicode__(self):
-        return self.name
+        return "%s - %s" % (self.name, self.guest.name)
     
 class Event(models.Model):
     
