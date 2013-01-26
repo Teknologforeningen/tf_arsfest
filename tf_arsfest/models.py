@@ -53,6 +53,41 @@ class Registration(models.Model):
     # Avec boolean
     avecbutton = models.BooleanField(verbose_name="Avec")
     
+    def get_dictionary(self):
+        
+        data = {}
+        
+        registration = {}
+        registration['org'] = self.name
+        registration['solenn'] = "Ja" if self.solennakt else "Nej"
+        registration['greeting'] = "Ja" if self.greeting else "Nej"
+        registration['misc'] = self.misc
+        data['registration'] = registration
+        
+        guest = {}
+        guest['name'] = self.guest.name
+        guest['email'] = self.guest.email
+        guest['phone'] = self.guest.phone
+        guest['allergies'] = self.guest.allergies
+        guest['type'] = unicode(self.guest.type)
+        guest['nonalcoholic'] = "Ja" if self.guest.nonalcoholic else "Nej"
+        guest['silliz'] = "Ja" if self.guest.silliz else "Nej"      
+        data['guest'] = guest
+        
+        avec = {}
+        if self.avec is not None:
+            avec['name'] = self.avec.name
+            avec['email'] = self.avec.email
+            avec['phone'] = self.avec.phone
+            avec['allergies'] = self.avec.allergies
+            avec['type'] = unicode(self.avec.type)
+            avec['nonalcoholic'] = "Ja" if self.avec.nonalcoholic else "Nej"
+            avec['silliz'] = "Ja" if self.avec.silliz else "Nej"
+            data['avec'] = avec
+            
+        return data
+        
+    
     
     
     def __unicode__(self):
