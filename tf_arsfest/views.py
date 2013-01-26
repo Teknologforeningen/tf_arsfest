@@ -7,6 +7,8 @@ from django.template import Context
 from forms import *
 from models import Event
 from django.utils import timezone
+from django.template.loader import render_to_string
+
 
     
 def register(request, year):
@@ -17,7 +19,7 @@ def register(request, year):
     
     
     now = timezone.now()
-    if now < event.round1_opens or (now > event.round1_closes and now < event.round2_opens) or now > event.round2_closes or guests >= event.places:
+    if now < event.round1_opens or (now > event.round1_closes and now < event.round2_opens) or now > event.round2_closes or not places > 0:
         return render_to_response('registration_closed.html', {'event': event, 'places': places}, context_instance=RequestContext(request))
         
     
@@ -57,7 +59,7 @@ def register(request, year):
             registration.save()
             
             data = registration.get_dictionary()
-            
+            send_registration_email(data)
             return render_to_response('registration_done.html', {'year': year, 'data': data}, context_instance=RequestContext(request))
         
     # If not POST    
@@ -77,11 +79,10 @@ def register(request, year):
                                                              'desc': event.registration_description}
                               , context_instance=RequestContext(request))
         
-def send_registration_email(reciever, data):
-    template = get_template('email.txt')
-     
-    subject, from_email, to = 'Registrering mottagen', 'arsk@teknolog.fi', reciever
-    content = template.render(Context())
+def send_registration_email(data):
+         
+    subject, from_email, to = 'Registrering mottagen', 'TF<arsk@teknolog.fi>', data['guest']['email']
+    content = render_to_string('email.txt', {'data': data})
      
     msg = EmailMultiAlternatives(subject, content, from_email, [to])
     msg.send()

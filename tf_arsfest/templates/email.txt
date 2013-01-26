@@ -1,29 +1,24 @@
-Tack för din anmälan till Teknologföreningens årsfest.
+Tack för din anmälan till Teknologföreningens årsfest. Nedan finner du din anmälan samt betalningsinformation.
 
 
-Förening: 				{{ data.registration.org }}
-Deltar i solenn akt:  	{{ data.registration.solenn }}
+Förening: {{ data.registration.org }}
+Deltar i solenn akt: {{ data.registration.solenn }}
 Vill framgöra hälsning: {{ data.registration.greeting }}
-Övrigt: 				{{ data.registration.misc }}
-				
-Namn: 					{{ data.guest.name }}
-Epost: 					{{ data.guest.email }}
-Telefon: 				{{ data.guest.phone }}
-Allergier/Diet: 		{{ data.guest.allergies }}
-Pris: 					{{ data.guest.type }}
-Alkoholfri:  			{{ data.guest.nonalcoholic }}
-				
+Övrigt: {{ data.registration.misc }}
+
+Namn: {{ data.guest.name }}
+Allergier/Diet: {{ data.guest.allergies }}
+Alkoholfri: {{ data.guest.nonalcoholic }}
 {% if data.avec %}
-Namn: 					{{ data.avec.name }}
-Epost: 					{{ data.avec.email }}
-Telefon: 				{{ data.avec.phone }}
-Allergier/Diet: 		{{ data.avec.allergies }}
-Pris: 					{{ data.avec.type }}
-Alkoholfri:  			{{ data.avec.nonalcoholic }}
+Namn: {{ data.avec.name }}
+Allergier/Diet: {{ data.avec.allergies }}
+Alkoholfri: {{ data.avec.nonalcoholic }}
 {% endif %}
 
 ============
-Summa: 					{{ data.sum }}
-Referensnummer: 		{{ data.referencenr }}
-Konto:					130930 - 57075
-Betalningstid:			14 dagar
+Summa: {{ data.sum }} €
+Referensnummer: {{ data.reference_number }}
+Konto: 130930 - 57075
+Betalningstid: 14 dagar
+
+I fall du har frågor kan du kontakta oss genom att svara på detta meddelande.
