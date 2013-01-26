@@ -1,5 +1,6 @@
 # --coding: UTF-8 --
 from django.db import models
+from referencenumber import viitenumeron_tarkiste
 
 class Guest(models.Model):
     # Name
@@ -53,6 +54,12 @@ class Registration(models.Model):
     # Avec boolean
     avecbutton = models.BooleanField(verbose_name="Avec")
     
+    # Referensnummer till räkning
+    reference_number = models.PositiveIntegerField(verbose_name="Referensnummer", blank=True, null=True, unique=True)
+    
+    # Summa på räkningen
+    sum = models.FloatField(verbose_name="Summa", blank=True, null=True)
+    
     def get_dictionary(self):
         
         data = {}
@@ -86,12 +93,26 @@ class Registration(models.Model):
             data['avec'] = avec
             
         return data
+    
+    def save(self, *args, **kwargs):        
+        self.sum = self.guest.type.price
+        
+        if self.avec is not None:
+            self.sum += self.avec.type.price
+        
+        super(Registration, self).save(*args, **kwargs)
+        
+        if self.reference_number is None:
+            pkey = "%d%d"%(self.event.year,self.pk)
+            self.reference_number = "%d%d"%(int(pkey), viitenumeron_tarkiste(pkey))
+            
+        super(Registration, self).save(*args, **kwargs)
         
     
     
     
     def __unicode__(self):
-        return "%s - %s" % (self.name, self.guest.name)
+        return "%s %s" % (self.name, self.guest.name)
     
 class Event(models.Model):
     
@@ -120,8 +141,10 @@ class Event(models.Model):
     round2_closes = models.TimeField()
     
     # Beskrivning på anmälan
-    registration_description = models.TextField(verbose_name="Beskrivning vid anmälan")
+    registration_description = models.TextField(verbose_name="Beskrivning vid anmälan")    
     
+    # Silliz pris
+    silliz_price = models.PositiveIntegerField(verbose_name="Sillis pris")
     
     def __unicode__(self):
         return self.name
@@ -137,6 +160,4 @@ class GuestType(models.Model):
     def __unicode__(self):
         return "%s (%de)" % (self.name, self.price)
     
-class Invoice(models.Model):
-    reference_number = models.PositiveIntegerField(verbose_name="Referensnummer")
-    sum = models.FloatField(verbose_name="Summa")
+
