@@ -129,16 +129,16 @@ class Event(models.Model):
     places = models.PositiveIntegerField(verbose_name="Max antal gäster")
     
     # Anmälningen öppnar första gången
-    round1_opens = models.TimeField()
+    round1_opens = models.DateTimeField()
     
     # Anmälningen stänger första gången
-    round1_closes = models.TimeField()
+    round1_closes = models.DateTimeField()
     
     # Anmälningen öppnar andra gången
-    round2_opens = models.TimeField()
+    round2_opens = models.DateTimeField()
     
     # Anmälningen stänger andra gången
-    round2_closes = models.TimeField()
+    round2_closes = models.DateTimeField()
     
     # Beskrivning på anmälan
     registration_description = models.TextField(verbose_name="Beskrivning vid anmälan")    
