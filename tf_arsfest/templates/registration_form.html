@@ -2,7 +2,7 @@
 <div class="row-fluid">
 	<div class="span9">
 	
-	<p>{{ desc }}</p>
+	<p>{{ desc|safe }}</p>
 
 		<form action="/{{ year }}/new/" method="post">
 			{% csrf_token %}

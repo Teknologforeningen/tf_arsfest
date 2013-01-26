@@ -4,6 +4,32 @@
 
 		<div class="hero-unit">
 			<h1>Registrerad</h1>
+
+				<ul>
+					<li><b>Förening: </b>{{ data.registration.org }}</li>
+					<li><b>Deltar i solenn akt: </b> {{ data.registration.solenn }}
+					<li><b>Vill framgöra hälsning: </b>{{ data.registration.greeting }}</li>
+					<li><b>Övrigt: </b>{{ data.registration.misc }}</li>
+				</ul>
+				<ul>
+					<li><b>Namn: </b>{{ data.guest.name }}</li>
+					<li><b>Epost: </b>{{ data.guest.email }}</li>
+					<li><b>Telefon: </b>{{ data.guest.phone }}</li>
+					<li><b>Allergier/Diet: </b>{{ data.guest.allergies }}</li>
+					<li><b>Pris: </b>{{ data.guest.type }}</li>
+					<li><b>Alkoholfri: </b> {{ data.guest.nonalcoholic }}</li>
+				</ul>
+				
+				{% if data.avec %}
+				<ul>
+					<li><b>Namn: </b>{{ data.avec.name }}</li>
+					<li><b>Epost: </b>{{ data.avec.email }}</li>
+					<li><b>Telefon: </b>{{ data.avec.phone }}</li>
+					<li><b>Allergier/Diet: </b>{{ data.avec.allergies }}</li>
+					<li><b>Pris: </b>{{ data.avec.type }}</li>
+					<li><b>Alkoholfri: </b> {{ data.avec.nonalcoholic }}</li>
+				</ul>
+				{% endif %}
 		</div>
 
 		
