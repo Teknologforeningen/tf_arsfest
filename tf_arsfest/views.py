@@ -1,5 +1,9 @@
 from django.template import RequestContext
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render_to_response, get_object_or_404
+from django.forms.models import model_to_dict
+from django.template.loader import get_template
+from django.template import Context
 from forms import *
 from models import Event
 
@@ -19,22 +23,14 @@ def register(request, year):
         # If the main guest form and registration specific info was correct
         if guest_form.is_valid() and registration_form.is_valid():
             
-            # Save, but do not commit to database before everything else is ok
-            guest = guest_form.save(commit=False)
-            
-            # Save, but do not commit until the guest is added and avec checks out
-            registration = registration_form.save(commit=False)
-
-            # Add guest to registration
-            registration.guest = guest
+            registration = registration_form.save(commit=False)   
             
             # If there was an avec
             if registration.avecbutton:
                 # If the avec was filled out correctly
                 if avec_form.is_valid():
-                    avec = avec_form.save(commit=False)
+                    avec = avec_form.save()
                     registration.avec = avec
-                    avec.save()
                 else:
                     return render_to_response('registration_form.html', {'registration': registration_form,
                                                              'guest': guest_form,
@@ -43,13 +39,15 @@ def register(request, year):
                                                              'desc': event.registration_description}
                                   , context_instance=RequestContext(request))
             
-            # All good, save          
-            guest.save()
+            # All good, save                   
+            guest = guest_form.save()
+            registration.guest = guest                 
+            registration.event = event
+            registration.save()
             
-            # Save all the relations    
-            registration_form.save_m2m()
+            data = registration.get_dictionary()
             
-            return render_to_response('registration_done.html', {'year': year}, context_instance=RequestContext(request))
+            return render_to_response('registration_done.html', {'year': year, 'data': data}, context_instance=RequestContext(request))
         
     # If not POST    
     else:
@@ -68,4 +66,11 @@ def register(request, year):
                                                              'desc': event.registration_description}
                               , context_instance=RequestContext(request))
         
-        
+def send_registration_email(reciever, data):
+    template = get_template('email.txt')
+     
+    subject, from_email, to = 'Registrering mottagen', 'arsk@teknolog.fi', reciever
+    content = template.render(Context())
+     
+    msg = EmailMultiAlternatives(subject, content, from_email, [to])
+    msg.send()
