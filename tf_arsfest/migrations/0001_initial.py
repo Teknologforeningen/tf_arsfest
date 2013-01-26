@@ -32,6 +32,8 @@ class Migration(SchemaMigration):
             ('avec', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='avec', unique=True, null=True, to=orm['tf_arsfest.Guest'])),
             ('misc', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('avecbutton', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('reference_number', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
+            ('sum', self.gf('django.db.models.fields.FloatField')(null=True, blank=True)),
         ))
         db.send_create_signal('tf_arsfest', ['Registration'])
 
@@ -57,14 +59,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('tf_arsfest', ['GuestType'])
 
-        # Adding model 'Invoice'
-        db.create_table('tf_arsfest_invoice', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('reference_number', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('sum', self.gf('django.db.models.fields.FloatField')()),
-        ))
-        db.send_create_signal('tf_arsfest', ['Invoice'])
-
 
     def backwards(self, orm):
         # Deleting model 'Guest'
@@ -78,9 +72,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'GuestType'
         db.delete_table('tf_arsfest_guesttype')
-
-        # Deleting model 'Invoice'
-        db.delete_table('tf_arsfest_invoice')
 
 
     models = {
@@ -113,12 +104,6 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'price': ('django.db.models.fields.PositiveIntegerField', [], {})
         },
-        'tf_arsfest.invoice': {
-            'Meta': {'object_name': 'Invoice'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'reference_number': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'sum': ('django.db.models.fields.FloatField', [], {})
-        },
         'tf_arsfest.registration': {
             'Meta': {'object_name': 'Registration'},
             'avec': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'avec'", 'unique': 'True', 'null': 'True', 'to': "orm['tf_arsfest.Guest']"}),
@@ -129,7 +114,9 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'misc': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
-            'solennakt': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+            'reference_number': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'solennakt': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'sum': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'})
         }
     }
 
