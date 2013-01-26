@@ -24,6 +24,8 @@ class Guest(models.Model):
     # Silliz
     silliz = models.BooleanField(verbose_name="Sillfrukost")
     
+    event = models.ForeignKey('Event', verbose_name="Årsfest");
+    
     def __unicode__(self):
         return self.name
     
@@ -120,7 +122,7 @@ class Event(models.Model):
     year = models.PositiveIntegerField(primary_key=True)
     
     # Date&Time
-    date = models.TimeField()
+    date = models.DateTimeField()
     
     # Name
     name = models.CharField(max_length=120, verbose_name="Händelsens namn")

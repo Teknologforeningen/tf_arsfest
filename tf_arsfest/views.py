@@ -6,11 +6,20 @@ from django.template.loader import get_template
 from django.template import Context
 from forms import *
 from models import Event
+from django.utils import timezone
 
     
 def register(request, year):
     
     event = get_object_or_404(Event, pk=year);
+    
+    places = event.places - len(Guest.objects.filter(event=event))
+    
+    
+    now = timezone.now()
+    if now < event.round1_opens or (now > event.round1_closes and now < event.round2_opens) or now > event.round2_closes or guests >= event.places:
+        return render_to_response('registration_closed.html', {'event': event, 'places': places}, context_instance=RequestContext(request))
+        
     
     # If posting a filled out form
     if request.POST:
@@ -30,6 +39,7 @@ def register(request, year):
                 # If the avec was filled out correctly
                 if avec_form.is_valid():
                     avec = avec_form.save()
+                    avec.event = event
                     registration.avec = avec
                 else:
                     return render_to_response('registration_form.html', {'registration': registration_form,
@@ -41,6 +51,7 @@ def register(request, year):
             
             # All good, save                   
             guest = guest_form.save()
+            guest.event = event
             registration.guest = guest                 
             registration.event = event
             registration.save()
