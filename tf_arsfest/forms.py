@@ -5,7 +5,7 @@ from models import Registration, Guest
 class RegistrationForm(ModelForm):
     class Meta:
         model = Registration
-        exclude = ('guest', 'avec', 'event')
+        exclude = ('guest', 'avec', 'event', 'reference_number', 'sum')
         
 class GuestForm(ModelForm):
     class Meta:
