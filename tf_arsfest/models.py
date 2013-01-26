@@ -94,7 +94,7 @@ class Registration(models.Model):
             avec['silliz'] = "Ja" if self.avec.silliz else "Nej"
             data['avec'] = avec
             
-        data['referens_number'] = self.reference_number
+        data['reference_number'] = self.reference_number
         data['sum'] = self.sum
         
         return data

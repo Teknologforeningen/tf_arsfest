@@ -40,8 +40,9 @@ def register(request, year):
             if registration.avecbutton:
                 # If the avec was filled out correctly
                 if avec_form.is_valid():
-                    avec = avec_form.save()
+                    avec = avec_form.save(commit=False)
                     avec.event = event
+                    avec.save()
                     registration.avec = avec
                 else:
                     return render_to_response('registration_form.html', {'registration': registration_form,
@@ -52,8 +53,9 @@ def register(request, year):
                                   , context_instance=RequestContext(request))
             
             # All good, save                   
-            guest = guest_form.save()
+            guest = guest_form.save(commit=False)
             guest.event = event
+            guest.save()
             registration.guest = guest                 
             registration.event = event
             registration.save()
