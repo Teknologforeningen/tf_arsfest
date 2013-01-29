@@ -1,14 +1,10 @@
 from django.template import RequestContext
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render_to_response, get_object_or_404
-from django.forms.models import model_to_dict
-from django.template.loader import get_template
-from django.template import Context
-from forms import *
-from models import Event
+from forms import GuestForm, RegistrationForm
+from models import Event, Guest, Registration
 from django.utils import timezone
 from django.template.loader import render_to_string
-
 
     
 def register(request, year):
@@ -88,3 +84,4 @@ def send_registration_email(data):
      
     msg = EmailMultiAlternatives(subject, content, from_email, [to])
     msg.send()
+
