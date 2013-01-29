@@ -50,6 +50,7 @@ class Migration(SchemaMigration):
             ('round2_closes', self.gf('django.db.models.fields.DateTimeField')()),
             ('registration_description', self.gf('django.db.models.fields.TextField')()),
             ('silliz_price', self.gf('django.db.models.fields.PositiveIntegerField')()),
+            ('alcohol_price', self.gf('django.db.models.fields.PositiveIntegerField')()),
         ))
         db.send_create_signal('tf_arsfest', ['Event'])
 
@@ -79,6 +80,7 @@ class Migration(SchemaMigration):
     models = {
         'tf_arsfest.event': {
             'Meta': {'object_name': 'Event'},
+            'alcohol_price': ('django.db.models.fields.PositiveIntegerField', [], {}),
             'date': ('django.db.models.fields.DateTimeField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
             'places': ('django.db.models.fields.PositiveIntegerField', [], {}),

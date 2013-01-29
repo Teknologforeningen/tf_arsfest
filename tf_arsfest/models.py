@@ -36,7 +36,7 @@ class Registration(models.Model):
     event = models.ForeignKey('Event', verbose_name="Årsfest");
     
     # Förening
-    name = models.CharField(max_length=150, verbose_name="Förening", blank=True, null=True)
+    name = models.CharField(max_length=150, verbose_name="Förening/Post", blank=True, null=True)
     
     # Deltar i solenn-akt
     solennakt = models.BooleanField(verbose_name="Deltar i solenn akt", default=False)
@@ -106,11 +106,14 @@ class Registration(models.Model):
             self.sum += self.avec.type.price
             if self.avec.silliz:
                 self.sum += self.event.silliz_price
+            if self.avec.nonalcoholic:
+                self.sum -= self.event.alcohol_price
             
         if self.guest.silliz:
             self.sum += self.event.silliz_price
             
-        
+        if self.guest.nonalcoholic:
+            self.sum -= self.event.alcohol_price
         
         super(Registration, self).save(*args, **kwargs)
         
@@ -157,6 +160,9 @@ class Event(models.Model):
     
     # Silliz pris
     silliz_price = models.PositiveIntegerField(verbose_name="Sillis pris")
+    
+    # Alkoholets pris
+    alcohol_price = models.PositiveIntegerField(verbose_name="Hur mycket billigare är alkoholfritt?")
     
     def __unicode__(self):
         return self.name
