@@ -11,7 +11,6 @@ class GuestForm(ModelForm):
     class Meta:
         model = Guest
         exclude = ('event')
-        widgets = {'type': RadioSelect}
         
         
     

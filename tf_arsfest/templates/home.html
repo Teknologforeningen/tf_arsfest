@@ -1,73 +1,78 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row-fluid">
-	<div class="span9">
+<div class="container">
 
-		<div class="hero-unit">
-			<h1>Teknologföreningen 141</h1>
-			<p>Välkommen på Teknologföreningens 141:sta årsfest!</p>
-			<p>Teknologföreningen firar sin 141:a årsfest lördagen den 23 mars 2013.
- 			Festligheterna inleds med solenn akt i Mellin-salen i Aalto-universitetets 
- 			Otnäs campus huvudbyggnad där det finns möjlighet att framföra hälsningar till jubilaren.
-			Efter solenn akten fortsätter festligheterna på Urdsgjallar
-			Priset på supékort är 65€ för studeranden och 80€ för graduerade. 
-			
-			Sillfrukosten kostar 8€ vid förköp, 10€ vid dörren..</p>
+	<div class="row">
+		<div class="offset1 span3">
+			<img class="bigtext" src="{{ STATIC_URL }}img/141.png" alt="141" />
+			<a href="/141/new/"><img src="{{ STATIC_URL }}img/anmal.png" alt="Anmälan &raquo;"/></a>
+		</div>
+
+
+
+		<div class="offset1 span3">
+			<h1>Välkommen</h1>
+			<h2>på Teknologföreningens 141:sta årsfest!</h2>
+			<p>Teknologföreningen firar sin 141:a årsfest lördagen den 23
+				mars 2013. Festligheterna inleds med solenn akt i Mellin-salen i
+				Aalto-universitetets Otnäs campus huvudbyggnad där det finns
+				möjlighet att framföra hälsningar till jubilaren. Efter solenn akten
+				fortsätter festligheterna på Urdsgjallar Priset på supékort är 65€
+				för studeranden och 80€ för graduerade. Sillfrukosten kostar 8€ vid
+				förköp, 10€ vid dörren..</p>
 
 			<p>Vi önskar alla gäster en trevlig och minnesrik fest!</p>
 			<p>
-				<a class="btn btn-primary btn-large" href="/141/new/">Anmälan &raquo;</a>
+				
+			</p>
+			<h2>Kontaktuppgifter</h2>
+			<p>Ifall det finns något oklart angående arrangemangen besvarar
+				årsfestmarskalkerna gärna dina frågor.</p>
+
+			<p>040 756 8021 Fanny Henriksson<br /> 
+			041 455 1213 Jonas Öhman<br /></p>
+			<p>
+				Urdsgjallar<br /> Otsvängen 22<br /> 02150 Esbo
+			</p>
+			
+		</div>
+		<!--/span-->
+
+		<div class="offset1 span3">
+			<h2>Tidtabell</h2>
+			
+			<table>
+			<tr><td colspan="2"><h3>23 Mars 2013</h3></td></tr>
+			
+				<tr>
+				<td>Solenn Akt</td><td>16:00</td><td>M-salen, Otsvängen 1</td>
+				</tr>
+				
+				<tr>
+				<td>Cocktail</td><td>17:30</td><td>Urdsgjallar, Otsvängen 22</td>
+				</tr>
+				
+				<tr>
+				<td>Bankett</td><td>19:00</td><td>Urdsgjallar, Otsvängen 22</td>
+				</tr>
+
+
+
+			<tr><td colspan="2"><h3>24 Mars 2012</h3></td></tr>
+			
+				<tr><td>Sillis</td><td>12:00</td><td>Urdsgjallar, Otsvängen 22</td></tr>
+			</table>
+			<p>
+				<a class=""
+					href="https://maps.google.com/maps/ms?msid=210659489061247135778.0004d36a44c2f3107b742&msa=0&ll=60.189287,24.827986&spn=0.010859,0.042272"
+					target="_blank">Karta &raquo;</a>
 			</p>
 		</div>
-
-		<div class="row-fluid">
-
-			<div class="span6">
-				<h2>Tid & Plats</h2>
-				<h3>Lördagen 23.3.2013</h3>
-				<ul>
-					<li>Solenn Akt 16:00 (M-salen, Otsvängen 1, se karta)</li>
-					<li>Coccare 17:30 (Urdsgjallar, Otsvängen 22)</li>
-					<li>Bankett 19:00 (Urdsgjallar, Otsvängen 22)</li>
-
-				</ul>
-				<p>Pris: 65€/studerande, 80€/graduerade</p>
-
-				<h3>Söndagen 24.3.2012</h3>
-				<ul>
-					<li>Sillis 12:00 (Urdsgjallar, Otsvängen 22)</li>
-				</ul>
-				<p>Pris: 8€/10€(dörren)</p>
-
-				<p>
-					<a class="btn"
-						href="https://maps.google.com/maps/ms?msid=210659489061247135778.0004d36a44c2f3107b742&msa=0&ll=60.189287,24.827986&spn=0.010859,0.042272"
-						target="_blank">Karta &raquo;</a>
-				</p>
-			</div>
-			<!--/span-->
-
-			<div class="span6">
-				<h2>Kontakt</h2>
-				<p>Ifall det finns något oklart angående arrangemangen besvarar
-					årsfestmarskalkerna gärna dina frågor.</p>
-
-				<p>
-					050123456789 Jonas Öhman<br /> 050123456789 Fanny Henriksson<br />
-				</p>
-				<p>
-					Urdsgjallar<br /> Otsvängen 22<br /> 02150 Esbo
-				</p>
-				<p>
-					<a class="btn" href="mailto:marskalker@teknologforeningen.fi"">Ta kontakt &raquo;</a>
-				</p>
-			</div>
-			<!--/span-->
-
-		</div>
-		<!--/row-->
+		<!--/span-->
 
 	</div>
-	<!--/span-->
+	<!--/row-->
+
+
 </div>
-<!--/row-->
+<!-- /container -->
 {% endblock %}
