@@ -9,10 +9,14 @@ Vill framgöra hälsning: {{ data.registration.greeting }}
 Namn: {{ data.guest.name }}
 Allergier/Diet: {{ data.guest.allergies }}
 Alkoholfri: {{ data.guest.nonalcoholic }}
+Pris: {{  data.guest.type }}
+Silliz: {{ data.guest.silliz }}
 {% if data.avec %}
 Namn: {{ data.avec.name }}
 Allergier/Diet: {{ data.avec.allergies }}
 Alkoholfri: {{ data.avec.nonalcoholic }}
+Pris: {{ data.avec.type }}
+Silliz: {{ data.avec.silliz }}
 {% endif %}
 
 ============
