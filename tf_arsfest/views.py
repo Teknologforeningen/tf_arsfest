@@ -67,6 +67,9 @@ def register(request, year):
         registration_form = RegistrationForm(instance=registration)
         guest_form = GuestForm(prefix='guest')
         avec_form = GuestForm(prefix='avec')
+        
+        if places <= 1:
+            registration_form.fields['avecbutton'].widget.attrs['disabled'] = True
 
     
     # If forms not valid or not POST
