@@ -16,19 +16,23 @@
 				<div id="avec-table">{{ avec.as_p }}</div>
 	
 						
-				<button type="submit" class="btn">Submit</button>
+				<button type="submit" class="btn">Skicka</button>
 			</p>
 		</form>
 
 		<script>
 			$(document).ready(function() {
 
-				if (!$("#id_avecbutton").is(":checked")) {
+				if (!$("#id_plusone").is(":checked")) {
 					$("#avec-table").hide();
+					$("#id_avecbutton").hide();
+					$("label[for=id_avecbutton]").hide();
 				}
 
-				$("#id_avecbutton").change(function() {
+				$("#id_plusone").change(function() {
 					$("#avec-table").toggle('slow');
+					$("#id_avecbutton").toggle();
+					$("label[for=id_avecbutton]").toggle();
 				});
 			});
 		</script>

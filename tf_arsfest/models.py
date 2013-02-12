@@ -53,6 +53,9 @@ class Registration(models.Model):
     # Övrigt
     misc = models.TextField(verbose_name="Övrigt", blank=True)
     
+    # +1 boolean
+    plusone = models.BooleanField(verbose_name="Lägg till person")
+    
     # Avec boolean
     avecbutton = models.BooleanField(verbose_name="Avec")
     

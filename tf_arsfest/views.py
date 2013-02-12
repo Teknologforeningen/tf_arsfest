@@ -33,7 +33,7 @@ def register(request, year):
             registration = registration_form.save(commit=False)   
             
             # If there was an avec
-            if registration.avecbutton:
+            if registration.plusone:
                 # If the avec was filled out correctly
                 if avec_form.is_valid():
                     avec = avec_form.save(commit=False)
