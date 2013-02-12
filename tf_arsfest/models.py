@@ -107,15 +107,16 @@ class Registration(models.Model):
         
         if self.avec is not None:
             self.sum += self.avec.type.price
+            if self.avec.nonalcoholic and self.avec.type.price != 0:
+                self.sum -= self.event.alcohol_price
             if self.avec.silliz:
                 self.sum += self.event.silliz_price
-            if self.avec.nonalcoholic:
-                self.sum -= self.event.alcohol_price
+            
             
         if self.guest.silliz:
             self.sum += self.event.silliz_price
             
-        if self.guest.nonalcoholic:
+        if self.guest.nonalcoholic and self.guest.type.price != 0:
             self.sum -= self.event.alcohol_price
         
         super(Registration, self).save(*args, **kwargs)
