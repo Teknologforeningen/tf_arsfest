@@ -2,17 +2,19 @@
 <div class="container">
 
 	<div class="row">
-		<div class="offset1 span3">
-			<img class="bigtext" src="{{ STATIC_URL }}img/141.png" alt="141" />
-			<a href="/141/new/"><img src="{{ STATIC_URL }}img/anmal.png" alt="Anmälan &raquo;"/></a>
+		<div class=" offset1 span2">
+		<a href="/">
+			<img class="logo hidden-phone" src="{{ STATIC_URL }}img/141.png" alt="141" />
+			<img class="visible-phone" src="{{ STATIC_URL }}img/141h.png" alt="141" />
+			</a>
 		</div>
 
 
-
+<div class="bird">
 		<div class="offset1 span3">
 		{% block middle %}
-			<h1>Välkommen</h1>
-			<h2>på Teknologföreningens 141:sta årsfest!</h2>
+			<h1 class="welcome">Välkommen</h1>
+			<p class="caps smallspacing">på Teknologföreningens 141:sta  årsfest!</p>
 			<p>Teknologföreningen firar sin 141:a årsfest lördagen den 23
 				mars 2013. Festligheterna inleds med solenn akt i Mellin-salen i
 				Aalto-universitetets Otnäs campus huvudbyggnad där det finns
@@ -23,14 +25,19 @@
 
 			<p>Vi önskar alla gäster en trevlig och minnesrik fest!</p>
 			<p>
+			
+			<a class="pink" href="/141/new/"><h2>Anmälan</h2></a>
 				
 			</p>
-			<h2>Kontaktuppgifter</h2>
+			<p class="caps">Kontaktuppgifter</p>
 			<p>Ifall det finns något oklart angående arrangemangen besvarar
 				årsfestmarskalkerna gärna dina frågor.</p>
 
 			<p>040 756 8021 Fanny Henriksson<br /> 
 			041 455 1213 Jonas Öhman<br /></p>
+			
+			<p><a href="mailto:marskalker@teknolog.fi">marskalker@teknolog.fi</a></p>
+			
 			<p>
 				Urdsgjallar<br /> Otsvängen 22<br /> 02150 Esbo
 			</p>
@@ -40,11 +47,11 @@
 		<!--/span-->
 		
 
-		<div class="offset1 span3">
-			<h2>Tidtabell</h2>
+		<div class="offset1 span4 timetable">
+			<h2 class="timetable">Tidtabell</h2>
 			
 			<table>
-			<tr><td colspan="2"><h3>23 Mars 2013</h3></td></tr>
+			<tr><td colspan="2"><h3 class="timetable">23 Mars 2013</h3></td></tr>
 			
 				<tr>
 				<td>Solenn Akt</td><td>16:00</td><td>M-salen, Otsvängen 1</td>
@@ -60,12 +67,12 @@
 
 
 
-			<tr><td colspan="2"><h3>24 Mars 2012</h3></td></tr>
+			<tr><td colspan="2"><h3 class="timetable">24 Mars 2012</h3></td></tr>
 			
 				<tr><td>Sillis</td><td>12:00</td><td>Urdsgjallar, Otsvängen 22</td></tr>
 			</table>
 			<p>
-				<a class=""
+				<br /><a class=""
 					href="https://maps.google.com/maps/ms?msid=210659489061247135778.0004d36a44c2f3107b742&msa=0&ll=60.189287,24.827986&spn=0.010859,0.042272"
 					target="_blank">Karta &raquo;</a>
 			</p>
@@ -74,7 +81,7 @@
 
 	</div>
 	<!--/row-->
-
+</div>
 
 </div>
 <!-- /container -->

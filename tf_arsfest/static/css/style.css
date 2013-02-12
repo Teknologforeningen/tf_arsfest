@@ -14,10 +14,11 @@ h2 {
 
 h3 {
 	font-size: 1.1em;
+	margin: 0;
 }
 
 td {
-	padding: 0 10px;
+	padding: 0 25px 0 0;
 }
 
 p {
@@ -30,4 +31,63 @@ a {
 
 p input {
 	display: block;
+}
+
+.container {
+	padding-top: 60px;
+}
+
+.bird {
+	background-image: url('/static/img/origami.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top right;
+	overflow: auto;
+}
+
+.welcome {
+font-size: 3em;
+letter-spacing: 2px;
+}
+
+.caps {
+		text-transform:uppercase;
+}
+
+.smallspacing {
+	letter-spacing: -1px;
+	/*text-align: center;*/
+	word-spacing: 3px;
+}
+
+.logo {
+	width: 140px;
+	float: right;
+}
+
+@media (min-width: 1200px){
+	div.timetable {
+	margin-top: 300px;
+	padding-bottom: 285px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	div.timetable {
+	margin-top: 150px;
+	}
+}
+
+h3.timetable {
+	height: 30px;
+}
+
+h2.timetable {
+	height: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+a, a:hover {
+	color: #de6ba8;
 }
