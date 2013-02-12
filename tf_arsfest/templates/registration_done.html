@@ -1,46 +1,36 @@
-{% extends 'base.html' %} {% block content %}
-<div class="row-fluid">
-	<div class="span9">
+{% extends 'home.html' %} {% block middle %}
 
-		<div class="hero-unit">
 			<h1>Registrerad</h1>
 
 				<ul>
-					<li><b>Förening: </b>{{ data.registration.org }}</li>
-					<li><b>Deltar i solenn akt: </b> {{ data.registration.solenn }}
-					<li><b>Vill framgöra hälsning: </b>{{ data.registration.greeting }}</li>
-					<li><b>Övrigt: </b>{{ data.registration.misc }}</li>
+					<li>Förening: {{ data.registration.org }}</li>
+					<li>Deltar i solenn akt:  {{ data.registration.solenn }}
+					<li>Vill framgöra hälsning: {{ data.registration.greeting }}</li>
+					<li>Övrigt: {{ data.registration.misc }}</li>
 				</ul>
 				<ul>
-					<li><b>Namn: </b>{{ data.guest.name }}</li>
-					<li><b>Epost: </b>{{ data.guest.email }}</li>
-					<li><b>Telefon: </b>{{ data.guest.phone }}</li>
-					<li><b>Allergier/Diet: </b>{{ data.guest.allergies }}</li>
-					<li><b>Pris: </b>{{ data.guest.type }}</li>
-					<li><b>Alkoholfri: </b> {{ data.guest.nonalcoholic }}</li>
+					<li>Namn: {{ data.guest.name }}</li>
+					<li>Epost: {{ data.guest.email }}</li>
+					<li>Telefon: {{ data.guest.phone }}</li>
+					<li>Allergier/Diet: {{ data.guest.allergies }}</li>
+					<li>Pris: {{ data.guest.type }}</li>
+					<li>Alkoholfri:  {{ data.guest.nonalcoholic }}</li>
 				</ul>
 				
 				{% if data.avec %}
 				<ul>
-					<li><b>Namn: </b>{{ data.avec.name }}</li>
-					<li><b>Epost: </b>{{ data.avec.email }}</li>
-					<li><b>Telefon: </b>{{ data.avec.phone }}</li>
-					<li><b>Allergier/Diet: </b>{{ data.avec.allergies }}</li>
-					<li><b>Pris: </b>{{ data.avec.type }}</li>
-					<li><b>Alkoholfri: </b> {{ data.avec.nonalcoholic }}</li>
+					<li>Namn: {{ data.avec.name }}</li>
+					<li>Epost: {{ data.avec.email }}</li>
+					<li>Telefon: {{ data.avec.phone }}</li>
+					<li>Allergier/Diet: {{ data.avec.allergies }}</li>
+					<li>Pris: {{ data.avec.type }}</li>
+					<li>Alkoholfri:  {{ data.avec.nonalcoholic }}</li>
 				</ul>
 				{% endif %}
 				
 				<ul>
-					<li><b>Referensnummer: </b>{{ data.reference_number }}</li>
-					<li><b>Summa: </b>{{ data.sum }}&euro;</li>
+					<li>Referensnummer: {{ data.reference_number }}</li>
+					<li>Summa: {{ data.sum }}&euro;</li>
 				</ul>
-		</div>
 
-		
-
-	</div>
-	<!--/span-->
-</div>
-<!--/row-->
 {% endblock %}

@@ -91,3 +91,7 @@ h2.timetable {
 a, a:hover {
 	color: #de6ba8;
 }
+
+li {
+	list-style: circle;
+}
