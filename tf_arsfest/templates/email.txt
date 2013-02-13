@@ -22,7 +22,8 @@ Silliz: {{ data.avec.silliz }}
 ============
 Summa: {{ data.sum }} €
 Referensnummer: {{ data.reference_number }}
-Konto: 130930 - 57075
-Betalningstid: 14 dagar
+Konto: FI13 1309 3000 0570 75
+BIC-kod: NDEAFIHH
+Betalningstid: 14 dagar från mottagande av detta meddelande.
 
 I fall du har frågor kan du kontakta oss genom att svara på detta meddelande.
