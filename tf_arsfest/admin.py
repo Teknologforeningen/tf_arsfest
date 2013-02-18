@@ -18,7 +18,7 @@ def export_guests_as_csv(modeladmin, request, queryset):
     writer = csv.writer(response)
     
     field_names = ['name', 'allergies', 'nonalcoholic']
-    field_labels = ['Namn', 'Allergier/Dieter', 'Alkoholfri', 'Avec']
+    field_labels = ['Namn', 'Allergier/Dieter', 'Alkoholfri', 'Avec', 'Avec allergier', 'Avec alkoholfri']
     
     writer.writerow([unicode(label).encode('utf-8') for label in field_labels])
  
@@ -31,6 +31,9 @@ def export_guests_as_csv(modeladmin, request, queryset):
                 avec = None
             fields = [unicode(getattr(guest, field)).encode('utf-8') for field in field_names]
             fields.append(avec)
+            if avec is not None:
+                fields.append(avec.allergies)
+                fields.append(avec.nonalcoholic)
             writer.writerow(fields)
     return response    
 
