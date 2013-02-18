@@ -108,12 +108,17 @@ class RegistrationAdmin(admin.ModelAdmin):
         export_csv_action("Export Registrations as CSV",
             fields=[
                     ('event', 'Fest'),
-                    ('name', 'Namn'),
+                    ('name', 'Grupp'),
                     ('solennakt', 'Solenn Akt'),
                     ('greeting', 'Hälsning'),
                     ('misc', 'Övrigt'),
+                    ('avecbutton', 'Avec är par?'),
                     ('guest__name', 'Gäst'),
+                    ('guest__allergies', 'Allergier/Diet'),
+                    ('guest__nonalcoholic', 'Alkoholfri'),
                     ('avec__name', 'Avec'),
+                    ('avec__allergies', 'Avec allergier'),
+                    ('avec__nonalcoholic', 'Avec alkoholfri'),
             ],
             header=True
         ),
