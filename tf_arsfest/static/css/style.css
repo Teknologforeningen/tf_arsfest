@@ -95,3 +95,14 @@ a, a:hover {
 li {
 	list-style: circle;
 }
+
+#spons img {
+	max-width: 180px;
+	max-height: 100px;
+	margin-right: 20px;
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+}
