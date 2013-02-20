@@ -24,6 +24,7 @@ Summa: {{ data.sum }} €
 Referensnummer: {{ data.reference_number }}
 Konto: FI13 1309 3000 0570 75
 BIC-kod: NDEAFIHH
+Mottagare: Teknologföreningen
 Betalningstid: 14 dagar från mottagande av detta meddelande.
 
 I fall du har frågor kan du kontakta oss genom att svara på detta meddelande.
