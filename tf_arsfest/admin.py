@@ -1,6 +1,7 @@
 # --coding: UTF-8 --
 import csv
 from django.contrib import admin
+from django.utils.encoding import smart_str, smart_unicode
 from django.http import HttpResponse
 from models import Guest, Event, GuestType, Registration
 
@@ -29,11 +30,11 @@ def export_guests_as_csv(modeladmin, request, queryset):
                 avec = Registration.objects.get(guest=guest).avec or Registration.objects.get(avec=guest).guest
             except:
                 avec = None
-            fields = [unicode(getattr(guest, field)).encode('utf-8') for field in field_names]
-            fields.append(avec)
+            fields = [smart_str(getattr(guest, field)) for field in field_names]
+            fields.append(smart_str(avec))
             if avec is not None:
-                fields.append(avec.allergies)
-                fields.append(avec.nonalcoholic)
+                fields.append(smart_str(avec.allergies))
+                fields.append(smart_str(avec.nonalcoholic))
             writer.writerow(fields)
     return response    
 
