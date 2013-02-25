@@ -4,8 +4,15 @@ from django.contrib import admin
 from django.utils.encoding import smart_str, smart_unicode
 from django.http import HttpResponse
 from models import Guest, Event, GuestType, Registration
+from views import send_registration_email
 
 admin.site.register(GuestType) 
+
+def resend_invoice_email(modeladmin, request, queryset):
+    for registration in queryset:
+        data = registration.get_dictionary()
+        send_registration_email(data)
+    
  
 # Exportta alla gäster som hör till de valda eventsen
 def export_guests_as_csv(modeladmin, request, queryset):
@@ -122,8 +129,7 @@ class RegistrationAdmin(admin.ModelAdmin):
                     ('avec__nonalcoholic', 'Avec alkoholfri'),
             ],
             header=True
-        ),
-               ]
+        ), resend_invoice_email]
     
 admin.site.register(Registration, RegistrationAdmin)
 
