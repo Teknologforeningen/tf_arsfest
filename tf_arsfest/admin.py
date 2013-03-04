@@ -9,15 +9,19 @@ from views import send_registration_email
 admin.site.register(GuestType) 
 
 def resend_invoice_email(modeladmin, request, queryset):
+    '''
+    Skickar epost med räkningen pånytt till valda registreringar.
+    '''
     for registration in queryset:
         data = registration.get_dictionary()
         send_registration_email(data)
     
  
-# Exportta alla gäster som hör till de valda eventsen
 def export_guests_as_csv(modeladmin, request, queryset):
     """ 
-        Based on http://djangosnippets.org/snippets/2712/
+    Exportta alla gäster som hör till de valda eventsen.
+    
+    Based on http://djangosnippets.org/snippets/2712/
     """
     opts = modeladmin.model._meta
 
@@ -25,23 +29,38 @@ def export_guests_as_csv(modeladmin, request, queryset):
     response['Content-Disposition'] = 'attachment; filename=%s.csv' % (unicode(opts).replace('.', '_'))
     writer = csv.writer(response)
     
+    # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
     field_names = ['name', 'allergies', 'nonalcoholic']
-    field_labels = ['Namn', 'Allergier/Dieter', 'Alkoholfri', 'Avec', 'Avec allergier', 'Avec alkoholfri']
+    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri']
     
+    #Skriv ut columnernas namn
     writer.writerow([unicode(label).encode('utf-8') for label in field_labels])
  
+    # Föv varhe fest
     for obj in queryset:
         guests = Guest.objects.filter(event__name=obj.name)
         for guest in guests:
+            
+            # Finns det en avec?
+            avec = False
             try:
-                avec = Registration.objects.get(guest=guest).avec or Registration.objects.get(avec=guest).guest
+                registration = Registration.objects.get(guest=guest)
             except:
-                avec = None
+                try:
+                    registration = Registration.objects.get(avec=guest)
+                    avec=True
+                except:
+                    continue
+            
             fields = [smart_str(getattr(guest, field)) for field in field_names]
-            fields.append(smart_str(avec))
-            if avec is not None:
-                fields.append(smart_str(avec.allergies))
-                fields.append(smart_str(avec.nonalcoholic))
+            
+            # Om avecen är vald som bordsdam/herre så sätts denne is amma grupp
+            # Detta görs så att tableplanner programmet skall sätta dom nära varandra
+            if avec and not getattr(registration, 'avecbutton'):
+                fields.insert(0, str(registration.pk)+'b')
+            else:
+                fields.insert(0, registration.pk)
+                
             writer.writerow(fields)
     return response    
 
@@ -109,6 +128,9 @@ class GuestAdmin(admin.ModelAdmin):
 admin.site.register(Guest, GuestAdmin)
 
 class RegistrationAdmin(admin.ModelAdmin):
+    '''
+    Custom admin funktioner för registreringar.
+    '''
     list_filter = ('event__name',)
     
     # Bestäm vad som exportas från registreringarna
@@ -116,7 +138,7 @@ class RegistrationAdmin(admin.ModelAdmin):
         export_csv_action("Export Registrations as CSV",
             fields=[
                     ('event', 'Fest'),
-                    ('name', 'Grupp'),
+                    ('name', 'Förening/Post'),
                     ('solennakt', 'Solenn Akt'),
                     ('greeting', 'Hälsning'),
                     ('misc', 'Övrigt'),
