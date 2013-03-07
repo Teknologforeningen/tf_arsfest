@@ -38,36 +38,42 @@ def export_guests_as_csv(modeladmin, request, queryset):
  
     # Föv varhe fest
     for obj in queryset:
-        guests = Guest.objects.filter(event__name=obj.name)
+        guests = Guest.objects.filter(event__name=obj.name).order_by('name')
         for guest in guests:
             
-            # Finns det en avec?
+            fields = [smart_str(getattr(guest, field)) for field in field_names]
+            
+            # Är denna gäst en avec till en annan gäst
             avec = False
             try:
+                # Denna gäst är inte en avec
                 registration = Registration.objects.get(guest=guest)
             except:
                 try:
+                    #Denna gäst är en avec till en gäst
                     registration = Registration.objects.get(avec=guest)
                     avec=True
                 except:
                     continue
-            
-            fields = [smart_str(getattr(guest, field)) for field in field_names]
-            
+
             # Ersätt True med "Alkoholfri" och False med tom sträng
             if fields[2] == "False":
                 fields[2] = "Alkoholfri"
             else:
                 fields[2] = ""
             
-            # Om avecen är vald som bordsdam/herre så sätts denne i samma grupp
-            # Detta görs så att tableplanner programmet skall sätta dom nära varandra
+            # Om avecen inte är vald som bordsdam/herre sätts denne i annan grupp
+            # Detta görs för tableplanner programmet
             if avec and not getattr(registration, 'avecbutton'):
                 fields.insert(0, str(registration.pk)+'b')
             else:
                 fields.insert(0, registration.pk)
                 
-            fields.append(smart_str(getattr(registration, 'misc')))
+            # Denna gäst är inte en avec, så vi lägger till övrigt spalten
+            if not avec:
+                fields.append(smart_str(getattr(registration, 'misc')))
+                
+            
                 
             writer.writerow(fields)
     return response    
