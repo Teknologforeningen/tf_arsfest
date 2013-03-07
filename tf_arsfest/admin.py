@@ -31,10 +31,10 @@ def export_guests_as_csv(modeladmin, request, queryset):
     
     # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
     field_names = ['name', 'allergies', 'nonalcoholic']
-    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri']
+    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri', 'Övrigt']
     
     #Skriv ut columnernas namn
-    writer.writerow([unicode(label).encode('utf-8') for label in field_labels])
+    writer.writerow([smart_str(label) for label in field_labels])
  
     # Föv varhe fest
     for obj in queryset:
@@ -54,12 +54,20 @@ def export_guests_as_csv(modeladmin, request, queryset):
             
             fields = [smart_str(getattr(guest, field)) for field in field_names]
             
-            # Om avecen är vald som bordsdam/herre så sätts denne is amma grupp
+            # Ersätt True med "Alkoholfri" och False med tom sträng
+            if fields[2] == "False":
+                fields[2] = "Alkoholfri"
+            else:
+                fields[2] = ""
+            
+            # Om avecen är vald som bordsdam/herre så sätts denne i samma grupp
             # Detta görs så att tableplanner programmet skall sätta dom nära varandra
             if avec and not getattr(registration, 'avecbutton'):
                 fields.insert(0, str(registration.pk)+'b')
             else:
                 fields.insert(0, registration.pk)
+                
+            fields.append(smart_str(getattr(registration, 'misc')))
                 
             writer.writerow(fields)
     return response    
