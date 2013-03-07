@@ -57,7 +57,7 @@ def export_guests_as_csv(modeladmin, request, queryset):
                     continue
 
             # Ersätt True med "Alkoholfri" och False med tom sträng
-            if fields[2] == "False":
+            if fields[2] == "True":
                 fields[2] = "Alkoholfri"
             else:
                 fields[2] = ""
