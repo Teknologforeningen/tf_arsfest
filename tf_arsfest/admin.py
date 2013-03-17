@@ -106,7 +106,36 @@ def export_greetings_as_csv(modeladmin, request, queryset):
                 
             writer.writerow(fields)
             
-    return response    
+    return response
+
+def export_invoice_as_csv(modeladmin, request, queryset):
+    """ 
+    Exportta alla gäster som hör till de valda eventsen.
+    
+    Based on http://djangosnippets.org/snippets/2712/
+    """
+    opts = modeladmin.model._meta
+
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=%s.csv' % (unicode(opts).replace('.', '_'))
+    writer = csv.writer(response)
+    
+    # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
+    field_names = ['reference_number', 'sum', 'guest', 'avec']
+    field_labels = ['Referens', 'Summa', 'Namn', 'Avec']
+    
+    #Skriv ut columnernas namn
+    writer.writerow([smart_str(label) for label in field_labels])
+ 
+    # Föv varhe fest
+    for obj in queryset:
+        registrations = Registration.objects.filter(event__name=obj.name).order_by('reference_number')
+        for registration in registrations:
+            
+            fields = [smart_str(getattr(registration, field)) for field in field_names]
+            
+            writer.writerow(fields)
+    return response 
 
 
 def prep_field(obj, field):
@@ -162,7 +191,7 @@ def export_csv_action(description="Export as CSV", fields=None, exclude=None, he
     return export_as_csv
 
 class EventModelAdmin(admin.ModelAdmin):
-    actions = [export_guests_as_csv,export_greetings_as_csv]
+    actions = [export_guests_as_csv,export_greetings_as_csv,export_invoice_as_csv]
  
 admin.site.register(Event, EventModelAdmin)
 
