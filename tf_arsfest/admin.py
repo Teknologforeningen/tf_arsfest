@@ -30,8 +30,8 @@ def export_guests_as_csv(modeladmin, request, queryset):
     writer = csv.writer(response)
     
     # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
-    field_names = ['name', 'allergies', 'nonalcoholic']
-    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri', 'Övrigt']
+    field_names = ['name', 'allergies', 'nonalcoholic', 'email', 'phone']
+    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri', 'Epost', 'Telefon', 'Övrigt']
     
     #Skriv ut columnernas namn
     writer.writerow([smart_str(label) for label in field_labels])
