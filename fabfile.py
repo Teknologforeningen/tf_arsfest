@@ -60,7 +60,7 @@ def deploy():
     env.release = time.strftime('%Y%m%d%H%M%S')
     upload_tar_from_git()
     install_requirements()
-    #install_site()
+    install_site()
     symlink_current_release()
     migrate()
     restart_webserver()
@@ -104,14 +104,14 @@ def install_site():
     "Add the virtualhost file to apache"
     require('release', provided_by=[deploy, setup])
     #sudo('cd %(path)s/releases/%(release)s; cp %(project_name)s%(virtualhost_path)s%(project_name)s /etc/apache2/sites-available/' % env)
-    sudo('cd %(path)s/releases/%(release)s; cp apache2.conf /etc/apache2/sites-available/%(project_name)s' % env)
+    sudo('cd %(path)s/releases/%(release)s/apache2/; cp arsfest /etc/apache2/sites-available/%(project_name)s' % env)
     sudo('cd /etc/apache2/sites-available/; a2ensite %(project_name)s' % env, pty=True) 
     
 def install_requirements():
     "Install the required packages from the requirements file using pip"
     require('release', provided_by=[deploy, setup])
     with prefix('source %(path)s/bin/activate' % env):
-        run_as_www('cd %(path)s; pip install -r ./releases/%(release)s/traffpunkt_aalto/hugin/requirements.txt' % env, pty=True)
+        run_as_www('cd %(path)s; pip install -r ./releases/%(release)s/requirements.txt' % env, pty=True)
     
 def symlink_current_release():
     "Symlink our current release"
