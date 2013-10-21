@@ -49,7 +49,13 @@ Migrate db:
 python manage.py migrate
 ```
 
+Deploying
+----------
 
+To deploy the service edit the fabfile.py with your information and run:
+```
+fab webserver deploy
+```
 
 Credits
 =========
