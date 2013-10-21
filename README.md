@@ -25,6 +25,9 @@ virtualenv --no-site-packages venv
 ```
 
 Activate virtualenv:
+
+You will need to run this every time you open a terminal to run the service in order to use the isolated virtual environment.
+
 ```
 source venv/bin/activate
 ```
