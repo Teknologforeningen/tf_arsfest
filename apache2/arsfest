@@ -1,0 +1,64 @@
+<VirtualHost *:80>
+  ServerName arsfest.teknologforeningen.fi
+  ServerAlias arsfest.teknolog.fi
+
+  ServerAdmin arsk@teknologforeningen.fi
+
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+</VirtualHost>
+
+
+<VirtualHost *:443>
+  ServerName arsfest.teknologforeningen.fi
+  ServerAlias arsfest.teknolog.fi
+
+  ServerAdmin arsfest@teknologforeningen.fi
+
+  ErrorLog /var/www/arsfest/logs/error.log
+  CustomLog /var/www/arsfest/logs/access.log combined
+
+
+  # Django settings
+  WSGIDaemonProcess arsfest user=www-data group=www-data threads=10 python-path=/var/www/arsfest/lib/python2.6/site-packages:/var/www/arsfest
+  WSGIProcessGroup arsfest
+  WSGIScriptAlias / /var/www/arsfest/releases/current/wsgi_handler.py
+
+  <Directory /var/www/arsfest/tf_arsfest/>
+      WSGIProcessGroup arsfest
+      Order deny,allow
+      Allow from all
+  </Directory>
+
+    # Non-Django directories
+    Alias /static/admin /usr/local/lib/python2.6/dist-packages/django/contrib/admin/static/admin/
+    Alias /static /var/www/arsfest/tf_arsfest/tf_arsfest/static/
+    <Location "/static">
+    Order allow,deny
+    Allow from all
+    SetHandler None
+    </Location>
+
+
+
+  SSLEngine on
+  SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+  SSLCertificateFile /etc/apache2/certs/wildcard.teknologforeningen.fi.crt
+  SSLCertificateKeyFile /etc/apache2/certs/wildcard.teknologforeningen.fi.key
+  SSLCertificateChainFile /etc/apache2/certs/wildcard.intermediate.crt
+
+  BrowserMatch ".*MSIE.*" \
+     nokeepalive ssl-unclean-shutdown \
+     downgrade-1.0 force-response-1.0
+
+  <Location />
+    SSLOptions +StdEnvVars
+  </Location>
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^arsfest\.teknologforeningen\.fi [NC]
+  RewriteRule ^/(.*) https://arsfest.teknologforeningen.fi/$1 [L,R]
+
+</VirtualHost>
