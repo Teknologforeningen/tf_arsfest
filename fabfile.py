@@ -1,0 +1,137 @@
+# Based on:
+# https://gist.github.com/fiee/158177
+
+from __future__ import with_statement # needed for python 2.5
+from fabric.api import *
+ 
+# globals
+env.project_name = 'arsfest'
+ 
+# environments
+ 
+def localhost():
+    "Use the local virtual server"
+    env.hosts = ['localhost']
+    env.path = '/home/%(user)s/workspace/%(project_name)s' % env
+    env.virtualhost_path = env.path
+ 
+def webserver():
+    "Use the actual webserver"
+    env.hosts = ['hugin.teknolog.fi']
+    env.user = "oehnstro" # Change this to your user on the webserver
+    env.wwwuser = 'www-data'
+    env.path = '/var/www/%(project_name)s' % env
+    env.virtualhost_path = env.path
+    
+# tasks
+ 
+def test():
+    "Run the test suite and bail out if it fails"
+    result = local("cd %(path)s; python manage.py test" % env) #, fail="abort")
+    
+    
+def setup():
+    """
+    Setup a fresh virtualenv as well as a few useful directories, then run
+    a full deployment
+    """
+    require('hosts', provided_by=[localhost,webserver])
+    require('path')
+    sudo('aptitude install -y python-setuptools python-pip')
+    sudo('pip install virtualenv')
+    sudo('aptitude install -y apache2-threaded')
+    sudo('aptitude install -y libapache2-mod-wsgi') # beware, outdated on hardy!
+    sudo('mkdir -p %(path)s; chown %(wwwuser)s:%(wwwuser)s %(path)s;' % env, pty=True)
+    with cd(env.path):
+        run_as_www('virtualenv .;' % env, pty=True)
+        run_as_www('mkdir -p logs; chmod a+w logs; mkdir -p releases; mkdir -p shared; mkdir -p packages;' % env, pty=True)
+        run_as_www('cd releases; ln -f -s . current; ln -f -s . previous;', pty=True)
+    deploy()
+    
+def deploy():
+    """
+    Deploy the latest version of the site to the servers, 
+    install any required third party modules, 
+    install the virtual host and then restart the webserver
+    """
+    require('hosts', provided_by=[localhost,webserver])
+    require('path')
+    import time
+    env.release = time.strftime('%Y%m%d%H%M%S')
+    upload_tar_from_git()
+    install_requirements()
+    #install_site()
+    symlink_current_release()
+    migrate()
+    restart_webserver()
+    
+def deploy_version(version):
+    "Specify a specific version to be made live"
+    require('hosts', provided_by=[localhost,webserver])
+    require('path')
+    env.version = version
+    with cd(env.path):
+        run_as_www('rm releases/previous; mv releases/current releases/previous;', pty=True)
+        run_as_www('ln -f -s %(version)s releases/current' % env, pty=True)
+    restart_webserver()
+    
+def rollback():
+    """
+    Limited rollback capability. Simple loads the previously current
+    version of the code. Rolling back again will swap between the two.
+    """
+    require('hosts', provided_by=[localhost,webserver])
+    require('path')
+    with cd(env.path):
+        run_as_www('mv releases/current releases/_previous;', pty=True)
+        run_as_www('mv releases/previous releases/current;', pty=True)
+        run_as_www('mv releases/_previous releases/previous;', pty=True)
+    restart_webserver()    
+    
+# Helpers. These are called by other functions rather than directly
+ 
+def upload_tar_from_git():
+    "Create an archive from the current Git master branch and upload it"
+    require('release', provided_by=[deploy, setup])
+    local('git archive --format=tar master | gzip > %(release)s.tar.gz' % env)
+    run_as_www('mkdir -p %(path)s/releases/%(release)s' % env, pty=True)
+    put('%(release)s.tar.gz' % env, '/tmp/')
+    sudo('chown %(wwwuser)s:%(wwwuser)s /tmp/%(release)s.tar.gz' % env)
+    run_as_www('cd %(path)s/releases/%(release)s && tar zxf /tmp/%(release)s.tar.gz' % env, pty=True)
+    local('rm %(release)s.tar.gz' % env)
+    
+def install_site():
+    "Add the virtualhost file to apache"
+    require('release', provided_by=[deploy, setup])
+    #sudo('cd %(path)s/releases/%(release)s; cp %(project_name)s%(virtualhost_path)s%(project_name)s /etc/apache2/sites-available/' % env)
+    sudo('cd %(path)s/releases/%(release)s; cp apache2.conf /etc/apache2/sites-available/%(project_name)s' % env)
+    sudo('cd /etc/apache2/sites-available/; a2ensite %(project_name)s' % env, pty=True) 
+    
+def install_requirements():
+    "Install the required packages from the requirements file using pip"
+    require('release', provided_by=[deploy, setup])
+    with prefix('source %(path)s/bin/activate' % env):
+        run_as_www('cd %(path)s; pip install -r ./releases/%(release)s/traffpunkt_aalto/hugin/requirements.txt' % env, pty=True)
+    
+def symlink_current_release():
+    "Symlink our current release"
+    require('release', provided_by=[deploy, setup])
+    with cd(env.path):
+        run_as_www('rm releases/previous; mv releases/current releases/previous;')
+        run_as_www('ln -f -s %(release)s releases/current' % env)
+    
+def migrate():
+    "Update the database"
+    require('project_name')
+    with prefix('source %(path)s/bin/activate' % env):
+        run_as_www('cd %(path)s/releases/current/;  ../../bin/python manage.py collectstatic --noinput' % env, pty=True)
+        run_as_www('cd %(path)s/releases/current/;  ../../bin/python manage.py syncdb --noinput' % env, pty=True)
+        run_as_www('cd %(path)s/releases/current/;  ../../bin/python manage.py migrate --noinput' % env, pty=True)
+    
+def restart_webserver():
+    "Restart the web server"
+    sudo('service apache2 reload', pty=True)
+
+def run_as_www(command, pty=True):
+    require('wwwuser', provided_by=[localhost,webserver])
+    sudo(command, pty=pty, user='%(wwwuser)s'%env)
