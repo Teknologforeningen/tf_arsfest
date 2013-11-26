@@ -24,7 +24,7 @@
   # Django settings
   WSGIDaemonProcess arsfest user=www-data group=www-data threads=10 python-path=/var/www/arsfest/lib/python2.6/site-packages:/var/www/arsfest
   WSGIProcessGroup arsfest
-  WSGIScriptAlias / /var/www/arsfest/releases/current/wsgi_handler.py
+  WSGIScriptAlias / /var/www/arsfest/releases/current/wsgi.py
 
   <Directory /var/www/arsfest/tf_arsfest/>
       WSGIProcessGroup arsfest
