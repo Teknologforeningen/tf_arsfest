@@ -16,7 +16,7 @@ sudo pip install virtualenv
 
 Clone the repository:
 ```
-git clone git@github.com:Teknologforeningen/tf_arsfest.git && cd tf_arsfest/
+git clone https://github.com/Teknologforeningen/tf_arsfest.git && cd tf_arsfest/
 ```
 
 Set up virtualenv:
