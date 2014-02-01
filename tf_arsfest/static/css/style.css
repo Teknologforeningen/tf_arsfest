@@ -2,10 +2,15 @@ body, label {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 }
+body {
+	background: #FFFFFF
+}
+
 h1, h2, h3 {
 	
 	font-weight: 300;
 	text-transform:uppercase;
+	color:#72beea
 }
 
 h2 {
@@ -19,15 +24,17 @@ h3 {
 
 td {
 	padding: 0 25px 0 0;
+	color: #040506
 }
 
 p {
 	text-align: justify;
+	color: #040506
 }
 
-a {
+/*a {
 	color: white;
-}
+}*/
 
 p input {
 	display: block;
@@ -37,8 +44,16 @@ p input {
 	padding-top: 60px;
 }
 
-.bird {
+/*.bird {
 	background-image: url('/static/img/origami.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top right;
+	overflow: auto;
+}*/
+
+.bird {
+	background-image: url('/static/img/isberg.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: top right;
@@ -61,8 +76,9 @@ letter-spacing: 2px;
 }
 
 .logo {
-	width: 140px;
-	float: right;
+	/*width: 500px;
+	height: 400px;*/
+	float: left;
 }
 
 @media (min-width: 1200px){
@@ -88,9 +104,9 @@ h2.timetable {
 	padding: 0;
 }
 
-a, a:hover {
+/*a, a:hover {
 	color: #de6ba8;
-}
+}*/
 
 li {
 	list-style: circle;
