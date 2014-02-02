@@ -32,10 +32,6 @@ p {
 	color: #040506
 }
 
-/*a {
-	color: white;
-}*/
-
 p input {
 	display: block;
 }
@@ -43,14 +39,6 @@ p input {
 .container {
 	padding-top: 60px;
 }
-
-/*.bird {
-	background-image: url('/static/img/origami.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: top right;
-	overflow: auto;
-}*/
 
 .bird {
 	background-image: url('/static/img/isberg.png');
@@ -103,10 +91,6 @@ h2.timetable {
 	margin: 0;
 	padding: 0;
 }
-
-/*a, a:hover {
-	color: #de6ba8;
-}*/
 
 li {
 	list-style: circle;
