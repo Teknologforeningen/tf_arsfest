@@ -4,9 +4,9 @@ Development
 Ubuntu
 -------
 
-Install pip:
+Install pip and python-dev:
 ```
-sudo apt-get install python-pip
+sudo apt-get install python-pip python-dev
 ```
 
 Install virtualenv:
