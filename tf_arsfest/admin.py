@@ -30,13 +30,13 @@ def export_guests_as_csv(modeladmin, request, queryset):
     writer = csv.writer(response)
     
     # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
-    field_names = ['name', 'allergies', 'nonalcoholic', 'email', 'phone']
-    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Alkoholfri', 'Epost', 'Telefon', 'Övrigt', 'Förening']
+    field_names = ['name', 'allergies', 'sex','nonalcoholic', 'email', 'phone']
+    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Kön', 'Alkoholfri', 'Epost', 'Telefon', 'Övrigt', 'Förening']
     
     #Skriv ut columnernas namn
     writer.writerow([smart_str(label) for label in field_labels])
  
-    # Föv varhe fest
+    # Föv varje fest
     for obj in queryset:
         guests = Guest.objects.filter(event__name=obj.name).order_by('name')
         for guest in guests:
@@ -128,7 +128,7 @@ def export_invoice_as_csv(modeladmin, request, queryset):
     #Skriv ut columnernas namn
     writer.writerow([smart_str(label) for label in field_labels])
  
-    # Föv varhe fest
+    # Föv varje fest
     for obj in queryset:
         registrations = Registration.objects.filter(event__name=obj.name).order_by('reference_number')
         for registration in registrations:
@@ -231,9 +231,11 @@ class RegistrationAdmin(admin.ModelAdmin):
                     ('avecbutton', 'Avec är par?'),
                     ('guest__name', 'Gäst'),
                     ('guest__allergies', 'Allergier/Diet'),
+                    ('guest__sex', 'Kön'),
                     ('guest__nonalcoholic', 'Alkoholfri'),
                     ('avec__name', 'Avec'),
                     ('avec__allergies', 'Avec allergier'),
+                    ('avec__sex', 'Avec kön'),
                     ('avec__nonalcoholic', 'Avec alkoholfri'),
             ],
             header=True

@@ -17,7 +17,10 @@ class Guest(models.Model):
     
     # Student or not
     type = models.ForeignKey('GuestType', verbose_name="Deltagartyp")
-    
+
+    # Sex
+    SEX = (('M', 'Man'),('F', 'Kvinna'))
+    sex = models.CharField(max_length=1, choices=SEX, verbose_name="Kön", blank=True)
     # Alkoholfri
     nonalcoholic = models.BooleanField(verbose_name="Alkoholfri", default=False)
     
@@ -81,6 +84,7 @@ class Registration(models.Model):
         guest['email'] = self.guest.email
         guest['phone'] = self.guest.phone
         guest['allergies'] = self.guest.allergies
+        guest['sex'] = self.guest.sex
         guest['type'] = unicode(self.guest.type)
         guest['nonalcoholic'] = "Ja" if self.guest.nonalcoholic else "Nej"
         guest['silliz'] = "Ja" if self.guest.silliz else "Nej"      
@@ -92,6 +96,7 @@ class Registration(models.Model):
             avec['email'] = self.avec.email
             avec['phone'] = self.avec.phone
             avec['allergies'] = self.avec.allergies
+            avec['sex'] = self.avec.sex
             avec['type'] = unicode(self.avec.type)
             avec['nonalcoholic'] = "Ja" if self.avec.nonalcoholic else "Nej"
             avec['silliz'] = "Ja" if self.avec.silliz else "Nej"
