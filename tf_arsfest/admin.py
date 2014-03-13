@@ -30,8 +30,8 @@ def export_guests_as_csv(modeladmin, request, queryset):
     writer = csv.writer(response)
     
     # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
-    field_names = ['name', 'allergies', 'sex','nonalcoholic', 'email', 'phone']
-    field_labels = ['Par', 'Namn', 'Allergier/Dieter', 'Kön', 'Alkoholfri', 'Epost', 'Telefon', 'Övrigt', 'Förening']
+    field_names = ['name', 'allergies', 'nonalcoholic', 'email', 'phone', 'sex']
+    field_labels = ['Par', 'Namn', 'Allergier/Dieter',  'Alkoholfri', 'Epost', 'Telefon', 'Kön', 'Övrigt', 'Förening']
     
     #Skriv ut columnernas namn
     writer.writerow([smart_str(label) for label in field_labels])
@@ -69,6 +69,9 @@ def export_guests_as_csv(modeladmin, request, queryset):
             else:
                 fields.insert(0, registration.pk)
                 
+            # Lägger till könet på personen
+            #fields.append(smart_str(guest.sex[0]))
+
             # Denna gäst är inte en avec, så vi lägger till övrigt spalten
             if not avec:
                 fields.append(smart_str(getattr(registration, 'misc')))
