@@ -2,91 +2,99 @@
 <div class="container">
 
 	<div class="row">
-		<!--div class=" offset0 span3">
-		<a href="/">
-			<img class="logo hidden-phone" src="{{ STATIC_URL }}img/143_noextra.png" alt="143" />
-			</a>
-		</div-->
+		<div class="offset1 span4">
+			<h1 class="welcome">Välkommen</h1>
+		</div>
+	</div>
 
-
-		<div class="bird">
-			<div class="offset1 span4">
+	<div class="row">
+		<div class="offset1 span4">
 			{% block middle %}
-				<h1 class="welcome">Välkommen</h1>
-				<p class="caps smallspacing">på Teknologföreningens 143:e  årsfest!</p>
-				<p>Teknologföreningen firar sin 143:e årsfest lördagen
-				den 21 mars 2015.</p>
-				<p>
-				Festligheterna inleds med solenn akt vid Design Factory (Betongblandargränden 5)
-				på Aalto-universitetets campus i Otnäs, där det
-				finns möjlighet att framföra hälsningar till nationen.
-				Efter den solenna akten fortsätter festligheterna på Teknologföreningens nationshus	
-				Urdsgjallar.</p>
-				<p>
-				Priset på supékortet
-				är 80€ för studerande (65€ alkoholfritt) och 100€ för graduerade (85€ alkoholfritt).
-				Sillfrukosten kostar 10€ vid förköp, 12€ vid dörren.</p>
+			<p class="caps smallspacing">på Teknologföreningens 143:e  årsfest!</p>
+			<p>Teknologföreningen firar sin 143:e årsfest lördagen
+			den 21 mars 2015.</p>
+			<p>
+			Festligheterna inleds med solenn akt vid Design Factory (Betongblandargränden 5)
+			på Aalto-universitetets campus i Otnäs, där det
+			finns möjlighet att framföra hälsningar till nationen.
+			Efter den solenna akten fortsätter festligheterna på Teknologföreningens nationshus	
+			Urdsgjallar.</p>
+			<p>
+			Priset på supékortet
+			är 80€ för studerande (65€ alkoholfritt) och 100€ för graduerade (85€ alkoholfritt).
+			Sillfrukosten kostar 10€ vid förköp, 12€ vid dörren.</p>
 
-				<p>Vi önskar alla gäster en trevlig och minnesrik fest!</p>
-				<p>
-				Anmälan öppnar 2 februari för inbjudna gäster och 16 februari för övriga.
-				<a class="pink" href="/143/new/"><h2>Anmälan</h2></a>
-					
-				</p>
-				<p class="caps">Kontaktuppgifter</p>
-				<p>Ifall det finns något oklart angående arrangemangen besvarar årsfestmarskalkerna gärna dina frågor.</p>
+			<p>Vi önskar alla gäster en trevlig och minnesrik fest!</p>
+			<p>
+			Anmälan öppnar 2 februari för inbjudna gäster och 16 februari för övriga.
+			<a class="pink" href="/143/new/"><h2>Anmälan</h2></a>
+				
+			</p>
+			{% endblock %}
 
-				<p>Andreas Holm 044 277 0611 <br /> 
-				Henrik Hillner 041 505 7004<br /></p>
+		</div>
+		<!--/span-->
+		
+		<div class="offset1 span3">
+		<a href="/">
+			<img class="logo" src="{{ STATIC_URL }}img/143_noextra.png" alt="143" />
+			</a>
+		</div>
 
-				
-				<p><a href="mailto:marskalker@teknolog.fi">marskalker@teknolog.fi</a></p>
-				
-				<p>
-					Urdsgjallar<br /> Otsvängen 22<br /> 02150 Esbo
-				</p>
-				
-				{% endblock %} <!--  end middle block -->
-			</div>
-			<!--/span-->
+	</div> <!-- /row -->
+
+	<div class="row">
+		<div class="offset1 span4">
+			<p class="caps">Kontaktuppgifter</p>
+			<p>Ifall det finns något oklart angående arrangemangen besvarar årsfestmarskalkerna gärna dina frågor.</p>
+
+			<p>Andreas Holm 044 277 0611 <br /> 
+			Henrik Hillner 041 505 7004<br /></p>
+
 			
-
-			<div class="offset1 span4 timetable">
-				<h2 class="timetable">Tidtabell</h2>
-				
-				<table>
-				<tr><td colspan="2"><h3 class="timetable">21 Mars 2015</h3></td></tr>
-				
-					<tr>
-					<td>Solenn Akt</td><td>16:00</td><td>Design Factory, Betongblandargränden 5C</td>
-					</tr>
-					
-					<tr>
-					<td>Cocktail</td><td>17:30</td><td>Urdsgjallar, Otsvängen 22</td>
-					</tr>
-					
-					<tr>
-					<td>Bankett</td><td>19:00</td><td>Urdsgjallar, Otsvängen 22</td>
-					</tr>
-
-					<tr><td colspan="2"><h3 class="timetable">22 Mars 2015</h3></td></tr>
-				
-					<tr><td>Sillfrukost</td><td>12:00</td><td>Urdsgjallar, Otsvängen 22</td></tr>
-				</table>
-				<p>
-					<br /><a
-						href="https://www.google.com/maps/d/viewer?mid=zaFxVrbCwvX0.kMudjIY3CB2w"
-						target="_blank">Karta &raquo;</a>
-				</p>
-				
-				<!--div id="spons">
-					<h2>Sponsorer</h2>
-					<img src="{{ STATIC_URL }}reklam/namnpafil.png" alt="Alt text"/>
-				</div-->
+			<p><a href="mailto:marskalker@teknolog.fi">marskalker@teknolog.fi</a></p>
 			
-			</div> <!--/span-->
+			<p>
+				Urdsgjallar<br /> Otsvängen 22<br /> 02150 Esbo
+			</p>
+		</div>
+		
+		<div class="offset1 span4">
+			<p class="caps">Tidtabell</p>
 			
-		</div> <!-- Bird -->
+			<table>
+			<tr><td colspan="2"><h3>21 Mars 2015</h3></td></tr>
+			
+				<tr>
+				<td>Solenn Akt</td><td>16:00</td><td>Design Factory, Betongblandargränden 5C</td>
+				</tr>
+				
+				<tr>
+				<td>Cocktail</td><td>17:30</td><td>Urdsgjallar, Otsvängen 22</td>
+				</tr>
+				
+				<tr>
+				<td>Bankett</td><td>19:00</td><td>Urdsgjallar, Otsvängen 22</td>
+				</tr>
+
+				<tr><td colspan="2"><h3 class="timetable">22 Mars 2015</h3></td></tr>
+			
+				<tr><td>Sillfrukost</td><td>12:00</td><td>Urdsgjallar, Otsvängen 22</td></tr>
+			</table>
+			<p>
+				<br /><a
+					href="https://www.google.com/maps/d/viewer?mid=zaFxVrbCwvX0.kMudjIY3CB2w"
+					target="_blank">Karta &raquo;</a>
+			</p>
+			
+			<!--div id="spons">
+				<h2>Sponsorer</h2>
+				<img src="{{ STATIC_URL }}reklam/namnpafil.png" alt="Alt text"/>
+			</div-->
+		
+		</div> <!--/span-->
+			
+		
 	
 	</div> <!--/row-->
 

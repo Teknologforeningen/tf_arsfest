@@ -1,12 +1,15 @@
-{% extends 'home.html' %} {% block middle %}
+{% extends 'home.html' %}
 
+{% block middle %}
 
 		<div class="">
 			<h1>Registreringen är inte öppen.</h1>
 
 				<p>Anmälan för inbjudna börjar {{ event.round1_opens }} och slutar {{ event.round1_closes }}</p>
 				<p>Allmänna anmälan börjar {{ event.round2_opens }} och slutar {{ event.round2_closes }}</p>
-				<p>Det finns {{ places }} platser kvar.
+				<p>Det finns {{ places }} platser kvar.</p>
+				<p><a class="caps" href="/">Tillbaka</a></p>
+				<h2>&nbsp;</h2>
 		</div>
 
 		

@@ -1,21 +1,16 @@
-{% extends 'home.html' %} {% block middle %}
+{% extends 'home.html' %}
+
+{% block middle %}
 
 		<p>{{ desc|safe }}</p>
 
 		<form action="/{{ year }}/new/" method="post">
 			{% csrf_token %}
 
-	
-
-
-
 				{{ guest.as_p }} {{ registration.as_p }}
 
-
-
 				<div id="avec-table">{{ avec.as_p }}</div>
-	
-						
+							
 				<button type="submit" class="btn">Skicka</button>
 			</p>
 		</form>
@@ -36,6 +31,5 @@
 				});
 			});
 		</script>
-
 
 {% endblock %}
