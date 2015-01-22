@@ -2,13 +2,13 @@
 <div class="container">
 
 	<div class="row">
-		<div class="offset1 span4">
+		<div class="offset1 span5">
 			<h1 class="welcome">Välkommen</h1>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="offset1 span4">
+		<div class="offset1 span5">
 			{% block middle %}
 			<p class="caps smallspacing">på Teknologföreningens 143:e  årsfest!</p>
 			<p>Teknologföreningen firar sin 143:e årsfest lördagen
@@ -20,14 +20,16 @@
 			Efter den solenna akten fortsätter festligheterna på Teknologföreningens nationshus	
 			Urdsgjallar.</p>
 			<p>
-			Priset på supékortet
-			är 80€ för studerande (65€ alkoholfritt) och 100€ för graduerade (85€ alkoholfritt).
-			Sillfrukosten kostar 10€ vid förköp, 12€ vid dörren.</p>
+			Priset på supékortet är 80<span class="euro">€</span> för studerande 
+			(65<span class="euro">€</span> alkoholfritt) och 100<span class="euro">€</span> 
+			för graduerade (85<span class="euro">€</span> alkoholfritt).
+			Sillfrukosten kostar 10<span class="euro">€</span> vid förköp, 
+			12<span class="euro">€</span> vid dörren.</p>
 
 			<p>Vi önskar alla gäster en trevlig och minnesrik fest!</p>
 			<p>
 			Anmälan öppnar 2 februari för inbjudna gäster och 16 februari för övriga.
-			<a class="pink" href="/143/new/"><h2>Anmälan</h2></a>
+			<a class="" href="/143/new/"><h2>Anmälan</h2></a>
 				
 			</p>
 			{% endblock %}
@@ -37,15 +39,15 @@
 		
 		<div class="offset1 span3">
 		<a href="/">
-			<img class="logo" src="{{ STATIC_URL }}img/143_noextra.png" alt="143" />
+			<img src="{{ STATIC_URL }}img/143_noextra.png" alt="143" />
 			</a>
 		</div>
 
 	</div> <!-- /row -->
 
 	<div class="row">
-		<div class="offset1 span4">
-			<p class="caps">Kontaktuppgifter</p>
+		<div class="offset1 span5">
+			<p class="caps heading">Kontaktuppgifter</p>
 			<p>Ifall det finns något oklart angående arrangemangen besvarar årsfestmarskalkerna gärna dina frågor.</p>
 
 			<p>Andreas Holm 044 277 0611 <br /> 
@@ -59,14 +61,14 @@
 			</p>
 		</div>
 		
-		<div class="offset1 span4">
-			<p class="caps">Tidtabell</p>
+		<div class="offset1 span5">
+			<p class="caps heading">Tidtabell</p>
 			
 			<table>
-			<tr><td colspan="2"><h3>21 Mars 2015</h3></td></tr>
+			<tr><td colspan="2"><h3 class="timetable">21 Mars 2015</h3></td></tr>
 			
 				<tr>
-				<td>Solenn Akt</td><td>16:00</td><td>Design Factory, Betongblandargränden 5C</td>
+				<td>Solenn Akt</td><td>16:00</td><td>Design Factory,</br > Betongblandargränden 5C</td>
 				</tr>
 				
 				<tr>
@@ -93,9 +95,7 @@
 			</div-->
 		
 		</div> <!--/span-->
-			
-		
-	
+
 	</div> <!--/row-->
 
 </div> <!-- /container -->
