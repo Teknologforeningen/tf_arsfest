@@ -7,13 +7,13 @@ body {
 	color: #000000;
 }
 a, a:hover {
-	color: #0000FF;
+	color: #0B00D8;
 }
 h1, h2, h3 {
 	
 	font-weight: 400;
 	text-transform:uppercase;
-	color:#72beea
+	color: #7A7AFF;
 }
 
 h2 {
@@ -47,10 +47,10 @@ p input {
 }
 
 .bird {
-	background-image: url('/static/img/isberg.png');
+	background-image: url('/static/img/143_opacity.png');
 	background-repeat: no-repeat;
 	background-size: contain;
-	background-position: top right;
+	background-position: top center;
 	overflow: auto;
 }
 
