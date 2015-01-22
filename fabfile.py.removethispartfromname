@@ -17,8 +17,8 @@ def localhost():
  
 def webserver():
     "Use the actual webserver"
-    env.hosts = ['servser.adress.here']
-    env.user = "somerandomusername" # Change this to your user on the webserver
+    env.hosts = ['som address to a server']
+    env.user = "username" # Change this to your user on the webserver
     env.wwwuser = 'www-data'
     env.path = '/var/www/%(project_name)s' % env
     env.virtualhost_path = env.path
