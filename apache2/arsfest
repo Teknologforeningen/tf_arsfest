@@ -33,11 +33,12 @@
 
     # Non-Django directories
     #Alias /static/admin /usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/admin/
-    #Alias /static /var/www/arsfest/tf_arsfest/tf_arsfest/static/
+    Alias /static /var/www/arsfest/static/
+    
     <Location "/static">
-    Order allow,deny
-    Allow from all
-    SetHandler None
+    	Order allow,deny
+    	Allow from all
+    	SetHandler None
     </Location>
 
 
