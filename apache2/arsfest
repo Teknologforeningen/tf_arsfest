@@ -13,7 +13,6 @@
 
 <VirtualHost *:443>
   ServerName arsfest.teknologforeningen.fi
-  ServerAlias arsfest.teknolog.fi
 
   ServerAdmin arsfest@teknologforeningen.fi
 
@@ -22,7 +21,7 @@
 
 
   # Django settings
-  WSGIDaemonProcess arsfest user=www-data group=www-data threads=10 python-path=/var/www/arsfest/lib/python2.6/site-packages:/var/www/arsfest
+  WSGIDaemonProcess arsfest user=www-data group=www-data threads=10 python-path=/var/www/arsfest/lib/python2.7/site-packages:/var/www/arsfest
   WSGIProcessGroup arsfest
   WSGIScriptAlias / /var/www/arsfest/releases/current/wsgi.py
 
@@ -33,8 +32,8 @@
   </Directory>
 
     # Non-Django directories
-    Alias /static/admin /usr/local/lib/python2.6/dist-packages/django/contrib/admin/static/admin/
-    Alias /static /var/www/arsfest/tf_arsfest/tf_arsfest/static/
+    #Alias /static/admin /usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/admin/
+    #Alias /static /var/www/arsfest/tf_arsfest/tf_arsfest/static/
     <Location "/static">
     Order allow,deny
     Allow from all
