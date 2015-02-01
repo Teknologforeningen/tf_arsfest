@@ -7,4 +7,4 @@ sqlite.db
 fabfile.py
 .settings/
 venv/
-tf_arsfest/static/reklam/*
+tf_arsfest/static/festreklam/*
