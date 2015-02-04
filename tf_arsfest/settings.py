@@ -2,7 +2,7 @@
 # Django settings for tf_arsfest project.
 import os, sys
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
