@@ -244,6 +244,8 @@ class RegistrationAdmin(admin.ModelAdmin):
                     ('avec__sex', 'Avec kön'),
                     ('avec__nonalcoholic', 'Avec alkoholfri'),
                     ('avec__type', 'Avec typ av gäst'),
+                    ('guest__silliz', 'Gäst silliz'),
+                    ('avec__silliz', 'Avec silliz'),
             ],
             header=True
         ), resend_invoice_email]
