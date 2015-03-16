@@ -88,3 +88,8 @@ def send_registration_email(data):
     msg = EmailMultiAlternatives(subject, content, from_email, [to])
     msg.send()
 
+
+def list_sponsor_logos(request):
+    #TODO:  Make the sponsorlogos so they are uploaded in admin interface.
+    #       And make this to return all those logos to display on an info screen...    
+    return render_to_response('sponsor_logos.html', context_instance=RequestContext(request))

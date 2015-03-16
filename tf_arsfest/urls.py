@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^(?P<year>\d\d\d)/new/$', register, name='add-participant'),
+    url(r'^sponsor_logos/', list_sponsor_logos, name='list_sponsor_logos'),
     
     
 )
