@@ -126,7 +126,7 @@ def export_invoice_as_csv(modeladmin, request, queryset):
     
     # Namn på fälten som gås igenom för vaje gäst. Tas från models.py
     field_names = ['reference_number', 'sum', 'name', 'guest', 'avec']
-    field_labels = ['Referens', 'Summa', 'Förening', 'Namn', 'Avec', 'Antal silliz']
+    field_labels = ['Referens', 'Summa', 'Förening', 'Namn', 'Avec', 'E-post','Antal silliz']
     
     #Skriv ut columnernas namn
     writer.writerow([smart_str(label) for label in field_labels])
@@ -148,8 +148,9 @@ def export_invoice_as_csv(modeladmin, request, queryset):
                     silliz += 1
             except:
                 pass
+            fields.append(guest.email)
             fields.append(silliz)
-            
+
             writer.writerow(fields)
     return response 
 
